@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="avancement">
+      <h2 data-cy="avancementDetailsHeading"><span jhiTranslate="hseApplicationApp.avancement.detail.title">Avancement</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ avancement.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.avancement.description">Description</span></dt>
+        <dd>
+          <span>{{ avancement.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.avancement.date">Date</span></dt>
+        <dd>
+          <span>{{ avancement.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.avancement.fichier1">Fichier 1</span></dt>
+        <dd>
+          <div *ngIf="avancement.fichier1">
+            <a (click)="openFile(avancement.fichier1, avancement.fichier1ContentType)">
+              <img
+                [src]="'data:' + avancement.fichier1ContentType + ';base64,' + avancement.fichier1"
+                style="max-width: 100%"
+                alt="avancement image"
+              />
+            </a>
+            {{ avancement.fichier1ContentType }}, {{ byteSize(avancement.fichier1) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.avancement.fichier2">Fichier 2</span></dt>
+        <dd>
+          <div *ngIf="avancement.fichier2">
+            <a (click)="openFile(avancement.fichier2, avancement.fichier2ContentType)">
+              <img
+                [src]="'data:' + avancement.fichier2ContentType + ';base64,' + avancement.fichier2"
+                style="max-width: 100%"
+                alt="avancement image"
+              />
+            </a>
+            {{ avancement.fichier2ContentType }}, {{ byteSize(avancement.fichier2) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.avancement.fichier3">Fichier 3</span></dt>
+        <dd>
+          <div *ngIf="avancement.fichier3">
+            <a (click)="openFile(avancement.fichier3, avancement.fichier3ContentType)">
+              <img
+                [src]="'data:' + avancement.fichier3ContentType + ';base64,' + avancement.fichier3"
+                style="max-width: 100%"
+                alt="avancement image"
+              />
+            </a>
+            {{ avancement.fichier3ContentType }}, {{ byteSize(avancement.fichier3) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.avancement.fichier4">Fichier 4</span></dt>
+        <dd>
+          <div *ngIf="avancement.fichier4">
+            <a (click)="openFile(avancement.fichier4, avancement.fichier4ContentType)">
+              <img
+                [src]="'data:' + avancement.fichier4ContentType + ';base64,' + avancement.fichier4"
+                style="max-width: 100%"
+                alt="avancement image"
+              />
+            </a>
+            {{ avancement.fichier4ContentType }}, {{ byteSize(avancement.fichier4) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.avancement.projet">Projet</span></dt>
+        <dd>
+          <div *ngIf="avancement.projet">
+            <a [routerLink]="['/projet', avancement.projet.id, 'view']">{{ avancement.projet.titre }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/avancement', avancement.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

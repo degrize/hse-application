@@ -48,6 +48,13 @@ public class CacheConfiguration {
             createCache(cm, com.degrize.hseapp.domain.User.class.getName());
             createCache(cm, com.degrize.hseapp.domain.Authority.class.getName());
             createCache(cm, com.degrize.hseapp.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.degrize.hseapp.domain.Projet.class.getName());
+            createCache(cm, com.degrize.hseapp.domain.Projet.class.getName() + ".regles");
+            createCache(cm, com.degrize.hseapp.domain.Projet.class.getName() + ".signalements");
+            createCache(cm, com.degrize.hseapp.domain.Projet.class.getName() + ".avancements");
+            createCache(cm, com.degrize.hseapp.domain.Regle.class.getName());
+            createCache(cm, com.degrize.hseapp.domain.Signalement.class.getName());
+            createCache(cm, com.degrize.hseapp.domain.Avancement.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

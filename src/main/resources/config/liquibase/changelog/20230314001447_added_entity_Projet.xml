@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Projet.
+    -->
+    <changeSet id="20230314001447-1" author="jhipster">
+        <createTable tableName="projet" remarks="Projet entity.\n@author MEDA.">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="titre" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="duree" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ville" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="fichier_1" type="${blobType}" remarks="Joindre une image au projet\n@author MEDA.">
+                <constraints nullable="true" />
+            </column>
+            <column name="fichier_1_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="fichier_2" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="fichier_2_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="fichier_3" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="fichier_3_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="fichier_4" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="fichier_4_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20230314001447-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/projet.csv"
+                  separator=";"
+                  tableName="projet"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="titre" type="string"/>
+            <column name="description" type="string"/>
+            <column name="duree" type="string"/>
+            <column name="ville" type="string"/>
+            <column name="code" type="string"/>
+            <column name="fichier_1" type="blob"/>
+            <column name="fichier_1_content_type" type="string"/>
+            <column name="fichier_2" type="blob"/>
+            <column name="fichier_2_content_type" type="string"/>
+            <column name="fichier_3" type="blob"/>
+            <column name="fichier_3_content_type" type="string"/>
+            <column name="fichier_4" type="blob"/>
+            <column name="fichier_4_content_type" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

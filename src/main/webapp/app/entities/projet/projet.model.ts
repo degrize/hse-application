@@ -1,0 +1,18 @@
+export interface IProjet {
+  id: number;
+  titre?: string | null;
+  description?: string | null;
+  duree?: string | null;
+  ville?: string | null;
+  code?: string | null;
+  fichier1?: string | null;
+  fichier1ContentType?: string | null;
+  fichier2?: string | null;
+  fichier2ContentType?: string | null;
+  fichier3?: string | null;
+  fichier3ContentType?: string | null;
+  fichier4?: string | null;
+  fichier4ContentType?: string | null;
+}
+
+export type NewProjet = Omit<IProjet, 'id'> & { id: null };

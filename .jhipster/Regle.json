@@ -1,0 +1,35 @@
+{
+  "applications": "*",
+  "changelogDate": "20230314001448",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "regle",
+  "fields": [
+    {
+      "fieldName": "texte",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Regle entity.\\n@author MEDA.",
+  "jpaMetamodelFiltering": false,
+  "name": "Regle",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "titre",
+      "otherEntityName": "projet",
+      "otherEntityRelationshipName": "regle",
+      "relationshipName": "projet",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}
