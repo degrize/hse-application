@@ -1,0 +1,81 @@
+{
+  "applications": "*",
+  "changelogDate": "20230314001447",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "projet",
+  "fields": [
+    {
+      "fieldName": "titre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duree",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ville",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fichier1",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image",
+      "javadoc": "Joindre une image au projet\\n@author MEDA."
+    },
+    {
+      "fieldName": "fichier2",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "fichier3",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "fichier4",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Projet entity.\\n@author MEDA.",
+  "jpaMetamodelFiltering": false,
+  "name": "Projet",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "texte",
+      "otherEntityName": "regle",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "regle",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "texte",
+      "otherEntityName": "signalement",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "signalement",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "description",
+      "otherEntityName": "avancement",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "avancement",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

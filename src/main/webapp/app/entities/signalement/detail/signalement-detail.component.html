@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="signalement">
+      <h2 data-cy="signalementDetailsHeading"><span jhiTranslate="hseApplicationApp.signalement.detail.title">Signalement</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ signalement.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.signalement.texte">Texte</span></dt>
+        <dd>
+          <span>{{ signalement.texte }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.signalement.date">Date</span></dt>
+        <dd>
+          <span>{{ signalement.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.signalement.projet">Projet</span></dt>
+        <dd>
+          <div *ngIf="signalement.projet">
+            <a [routerLink]="['/projet', signalement.projet.id, 'view']">{{ signalement.projet.titre }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/signalement', signalement.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

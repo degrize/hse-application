@@ -1,0 +1,188 @@
+<div>
+  <h2 id="page-heading" data-cy="ProjetHeading">
+    <span jhiTranslate="hseApplicationApp.projet.home.title">Projets</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="hseApplicationApp.projet.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-projet"
+        [routerLink]="['/projet/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="hseApplicationApp.projet.home.createLabel"> Créer un nouveau Projet </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="projets?.length === 0">
+    <span jhiTranslate="hseApplicationApp.projet.home.notFound">Aucun Projet trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="projets && projets.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="titre">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.projet.titre">Titre</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.projet.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="duree">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.projet.duree">Duree</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ville">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.projet.ville">Ville</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="code">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.projet.code">Code</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fichier1">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.projet.fichier1">Fichier 1</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fichier2">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.projet.fichier2">Fichier 2</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fichier3">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.projet.fichier3">Fichier 3</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fichier4">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.projet.fichier4">Fichier 4</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let projet of projets; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/projet', projet.id, 'view']">{{ projet.id }}</a>
+          </td>
+          <td>{{ projet.titre }}</td>
+          <td>{{ projet.description }}</td>
+          <td>{{ projet.duree }}</td>
+          <td>{{ projet.ville }}</td>
+          <td>{{ projet.code }}</td>
+          <td>
+            <a *ngIf="projet.fichier1" (click)="openFile(projet.fichier1, projet.fichier1ContentType)">
+              <img
+                [src]="'data:' + projet.fichier1ContentType + ';base64,' + projet.fichier1"
+                style="max-height: 30px"
+                alt="projet image"
+              />
+            </a>
+            <span *ngIf="projet.fichier1">{{ projet.fichier1ContentType }}, {{ byteSize(projet.fichier1) }}</span>
+          </td>
+          <td>
+            <a *ngIf="projet.fichier2" (click)="openFile(projet.fichier2, projet.fichier2ContentType)">
+              <img
+                [src]="'data:' + projet.fichier2ContentType + ';base64,' + projet.fichier2"
+                style="max-height: 30px"
+                alt="projet image"
+              />
+            </a>
+            <span *ngIf="projet.fichier2">{{ projet.fichier2ContentType }}, {{ byteSize(projet.fichier2) }}</span>
+          </td>
+          <td>
+            <a *ngIf="projet.fichier3" (click)="openFile(projet.fichier3, projet.fichier3ContentType)">
+              <img
+                [src]="'data:' + projet.fichier3ContentType + ';base64,' + projet.fichier3"
+                style="max-height: 30px"
+                alt="projet image"
+              />
+            </a>
+            <span *ngIf="projet.fichier3">{{ projet.fichier3ContentType }}, {{ byteSize(projet.fichier3) }}</span>
+          </td>
+          <td>
+            <a *ngIf="projet.fichier4" (click)="openFile(projet.fichier4, projet.fichier4ContentType)">
+              <img
+                [src]="'data:' + projet.fichier4ContentType + ';base64,' + projet.fichier4"
+                style="max-height: 30px"
+                alt="projet image"
+              />
+            </a>
+            <span *ngIf="projet.fichier4">{{ projet.fichier4ContentType }}, {{ byteSize(projet.fichier4) }}</span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/projet', projet.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/projet', projet.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(projet)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="projets && projets.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

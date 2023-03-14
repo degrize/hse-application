@@ -1,0 +1,30 @@
+{
+  "hseApplicationApp": {
+    "avancement": {
+      "home": {
+        "title": "Avancements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Avancement",
+        "createOrEditLabel": "Create or edit a Avancement",
+        "notFound": "No Avancements found"
+      },
+      "created": "A new Avancement is created with identifier {{ param }}",
+      "updated": "A Avancement is updated with identifier {{ param }}",
+      "deleted": "A Avancement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Avancement {{ id }}?"
+      },
+      "detail": {
+        "title": "Avancement"
+      },
+      "id": "ID",
+      "description": "Description",
+      "date": "Date",
+      "fichier1": "Fichier 1",
+      "fichier2": "Fichier 2",
+      "fichier3": "Fichier 3",
+      "fichier4": "Fichier 4",
+      "projet": "Projet"
+    }
+  }
+}
