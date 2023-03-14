@@ -1,0 +1,35 @@
+{
+  "applications": "*",
+  "changelogDate": "20230314001449",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "signalement",
+  "fields": [
+    {
+      "fieldName": "texte",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Signalement entity.\\n@author MEDA.",
+  "jpaMetamodelFiltering": false,
+  "name": "Signalement",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "titre",
+      "otherEntityName": "projet",
+      "otherEntityRelationshipName": "signalement",
+      "relationshipName": "projet",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

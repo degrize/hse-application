@@ -1,0 +1,26 @@
+{
+  "hseApplicationApp": {
+    "signalement": {
+      "home": {
+        "title": "Signalements",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Signalement",
+        "createOrEditLabel": "Créer ou éditer un Signalement",
+        "notFound": "Aucun Signalement trouvé"
+      },
+      "created": "Un nouveau Signalement a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Signalement avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Signalement avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Signalement {{ id }} ?"
+      },
+      "detail": {
+        "title": "Signalement"
+      },
+      "id": "ID",
+      "texte": "Texte",
+      "date": "Date",
+      "projet": "Projet"
+    }
+  }
+}

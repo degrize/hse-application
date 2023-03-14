@@ -1,0 +1,188 @@
+<div>
+  <h2 id="page-heading" data-cy="AvancementHeading">
+    <span jhiTranslate="hseApplicationApp.avancement.home.title">Avancements</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="hseApplicationApp.avancement.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-avancement"
+        [routerLink]="['/avancement/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="hseApplicationApp.avancement.home.createLabel"> Créer un nouveau Avancement </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="avancements?.length === 0">
+    <span jhiTranslate="hseApplicationApp.avancement.home.notFound">Aucun Avancement trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="avancements && avancements.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.avancement.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.avancement.date">Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fichier1">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.avancement.fichier1">Fichier 1</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fichier2">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.avancement.fichier2">Fichier 2</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fichier3">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.avancement.fichier3">Fichier 3</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fichier4">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.avancement.fichier4">Fichier 4</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="projet.titre">
+            <div class="d-flex">
+              <span jhiTranslate="hseApplicationApp.avancement.projet">Projet</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let avancement of avancements; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/avancement', avancement.id, 'view']">{{ avancement.id }}</a>
+          </td>
+          <td>{{ avancement.description }}</td>
+          <td>{{ avancement.date | formatMediumDate }}</td>
+          <td>
+            <a *ngIf="avancement.fichier1" (click)="openFile(avancement.fichier1, avancement.fichier1ContentType)">
+              <img
+                [src]="'data:' + avancement.fichier1ContentType + ';base64,' + avancement.fichier1"
+                style="max-height: 30px"
+                alt="avancement image"
+              />
+            </a>
+            <span *ngIf="avancement.fichier1">{{ avancement.fichier1ContentType }}, {{ byteSize(avancement.fichier1) }}</span>
+          </td>
+          <td>
+            <a *ngIf="avancement.fichier2" (click)="openFile(avancement.fichier2, avancement.fichier2ContentType)">
+              <img
+                [src]="'data:' + avancement.fichier2ContentType + ';base64,' + avancement.fichier2"
+                style="max-height: 30px"
+                alt="avancement image"
+              />
+            </a>
+            <span *ngIf="avancement.fichier2">{{ avancement.fichier2ContentType }}, {{ byteSize(avancement.fichier2) }}</span>
+          </td>
+          <td>
+            <a *ngIf="avancement.fichier3" (click)="openFile(avancement.fichier3, avancement.fichier3ContentType)">
+              <img
+                [src]="'data:' + avancement.fichier3ContentType + ';base64,' + avancement.fichier3"
+                style="max-height: 30px"
+                alt="avancement image"
+              />
+            </a>
+            <span *ngIf="avancement.fichier3">{{ avancement.fichier3ContentType }}, {{ byteSize(avancement.fichier3) }}</span>
+          </td>
+          <td>
+            <a *ngIf="avancement.fichier4" (click)="openFile(avancement.fichier4, avancement.fichier4ContentType)">
+              <img
+                [src]="'data:' + avancement.fichier4ContentType + ';base64,' + avancement.fichier4"
+                style="max-height: 30px"
+                alt="avancement image"
+              />
+            </a>
+            <span *ngIf="avancement.fichier4">{{ avancement.fichier4ContentType }}, {{ byteSize(avancement.fichier4) }}</span>
+          </td>
+          <td>
+            <div *ngIf="avancement.projet">
+              <a [routerLink]="['/projet', avancement.projet.id, 'view']">{{ avancement.projet.titre }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/avancement', avancement.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/avancement', avancement.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(avancement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="avancements && avancements.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

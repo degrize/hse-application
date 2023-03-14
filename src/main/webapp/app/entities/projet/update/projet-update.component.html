@@ -1,0 +1,237 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-projet-heading" data-cy="ProjetCreateUpdateHeading" jhiTranslate="hseApplicationApp.projet.home.createOrEditLabel">
+        Créer ou éditer un Projet
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="hseApplicationApp.projet.titre" for="field_titre">Titre</label>
+          <input type="text" class="form-control" name="titre" id="field_titre" data-cy="titre" formControlName="titre" />
+          <div *ngIf="editForm.get('titre')!.invalid && (editForm.get('titre')!.dirty || editForm.get('titre')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('titre')?.errors?.required" jhiTranslate="entity.validation.required">
+              Ce champ est obligatoire.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="hseApplicationApp.projet.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="hseApplicationApp.projet.duree" for="field_duree">Duree</label>
+          <input type="text" class="form-control" name="duree" id="field_duree" data-cy="duree" formControlName="duree" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="hseApplicationApp.projet.ville" for="field_ville">Ville</label>
+          <input type="text" class="form-control" name="ville" id="field_ville" data-cy="ville" formControlName="ville" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="hseApplicationApp.projet.code" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="hseApplicationApp.projet.fichier1"
+            for="field_fichier1"
+            [ngbTooltip]="'hseApplicationApp.projet.help.fichier1' | translate"
+            >Fichier 1</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('fichier1ContentType')!.value + ';base64,' + editForm.get('fichier1')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('fichier1')!.value"
+              alt="projet image"
+            />
+            <div *ngIf="editForm.get('fichier1')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('fichier1ContentType')!.value }}, {{ byteSize(editForm.get('fichier1')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('fichier1', 'fichier1ContentType', 'file_fichier1')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_fichier1"
+              data-cy="fichier1"
+              (change)="setFileData($event, 'fichier1', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="fichier1" id="field_fichier1" data-cy="fichier1" formControlName="fichier1" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="fichier1ContentType"
+            id="field_fichier1ContentType"
+            formControlName="fichier1ContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="hseApplicationApp.projet.fichier2" for="field_fichier2">Fichier 2</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('fichier2ContentType')!.value + ';base64,' + editForm.get('fichier2')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('fichier2')!.value"
+              alt="projet image"
+            />
+            <div *ngIf="editForm.get('fichier2')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('fichier2ContentType')!.value }}, {{ byteSize(editForm.get('fichier2')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('fichier2', 'fichier2ContentType', 'file_fichier2')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_fichier2"
+              data-cy="fichier2"
+              (change)="setFileData($event, 'fichier2', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="fichier2" id="field_fichier2" data-cy="fichier2" formControlName="fichier2" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="fichier2ContentType"
+            id="field_fichier2ContentType"
+            formControlName="fichier2ContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="hseApplicationApp.projet.fichier3" for="field_fichier3">Fichier 3</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('fichier3ContentType')!.value + ';base64,' + editForm.get('fichier3')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('fichier3')!.value"
+              alt="projet image"
+            />
+            <div *ngIf="editForm.get('fichier3')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('fichier3ContentType')!.value }}, {{ byteSize(editForm.get('fichier3')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('fichier3', 'fichier3ContentType', 'file_fichier3')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_fichier3"
+              data-cy="fichier3"
+              (change)="setFileData($event, 'fichier3', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="fichier3" id="field_fichier3" data-cy="fichier3" formControlName="fichier3" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="fichier3ContentType"
+            id="field_fichier3ContentType"
+            formControlName="fichier3ContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="hseApplicationApp.projet.fichier4" for="field_fichier4">Fichier 4</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('fichier4ContentType')!.value + ';base64,' + editForm.get('fichier4')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('fichier4')!.value"
+              alt="projet image"
+            />
+            <div *ngIf="editForm.get('fichier4')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('fichier4ContentType')!.value }}, {{ byteSize(editForm.get('fichier4')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('fichier4', 'fichier4ContentType', 'file_fichier4')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_fichier4"
+              data-cy="fichier4"
+              (change)="setFileData($event, 'fichier4', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="fichier4" id="field_fichier4" data-cy="fichier4" formControlName="fichier4" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="fichier4ContentType"
+            id="field_fichier4ContentType"
+            formControlName="fichier4ContentType"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

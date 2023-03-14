@@ -1,0 +1,38 @@
+{
+  "hseApplicationApp": {
+    "projet": {
+      "home": {
+        "title": "Projets",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Projet",
+        "createOrEditLabel": "Créer ou éditer un Projet",
+        "notFound": "Aucun Projet trouvé"
+      },
+      "created": "Un nouveau Projet a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Projet avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Projet avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Projet {{ id }} ?"
+      },
+      "detail": {
+        "title": "Projet"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "description": "Description",
+      "duree": "Duree",
+      "ville": "Ville",
+      "code": "Code",
+      "fichier1": "Fichier 1",
+      "fichier2": "Fichier 2",
+      "fichier3": "Fichier 3",
+      "fichier4": "Fichier 4",
+      "regle": "Regle",
+      "signalement": "Signalement",
+      "avancement": "Avancement",
+      "help": {
+        "fichier1": "Joindre une image au projet\n@author MEDA."
+      }
+    }
+  }
+}

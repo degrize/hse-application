@@ -1,0 +1,26 @@
+{
+  "hseApplicationApp": {
+    "regle": {
+      "home": {
+        "title": "Regles",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Regle",
+        "createOrEditLabel": "Créer ou éditer un Regle",
+        "notFound": "Aucun Regle trouvé"
+      },
+      "created": "Un nouveau Regle a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Regle avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Regle avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Regle {{ id }} ?"
+      },
+      "detail": {
+        "title": "Regle"
+      },
+      "id": "ID",
+      "texte": "Texte",
+      "date": "Date",
+      "projet": "Projet"
+    }
+  }
+}

@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="projet">
+      <h2 data-cy="projetDetailsHeading"><span jhiTranslate="hseApplicationApp.projet.detail.title">Projet</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ projet.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.projet.titre">Titre</span></dt>
+        <dd>
+          <span>{{ projet.titre }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.projet.description">Description</span></dt>
+        <dd>
+          <span>{{ projet.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.projet.duree">Duree</span></dt>
+        <dd>
+          <span>{{ projet.duree }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.projet.ville">Ville</span></dt>
+        <dd>
+          <span>{{ projet.ville }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.projet.code">Code</span></dt>
+        <dd>
+          <span>{{ projet.code }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="hseApplicationApp.projet.fichier1" [ngbTooltip]="'hseApplicationApp.projet.help.fichier1' | translate"
+            >Fichier 1</span
+          >
+        </dt>
+        <dd>
+          <div *ngIf="projet.fichier1">
+            <a (click)="openFile(projet.fichier1, projet.fichier1ContentType)">
+              <img [src]="'data:' + projet.fichier1ContentType + ';base64,' + projet.fichier1" style="max-width: 100%" alt="projet image" />
+            </a>
+            {{ projet.fichier1ContentType }}, {{ byteSize(projet.fichier1) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.projet.fichier2">Fichier 2</span></dt>
+        <dd>
+          <div *ngIf="projet.fichier2">
+            <a (click)="openFile(projet.fichier2, projet.fichier2ContentType)">
+              <img [src]="'data:' + projet.fichier2ContentType + ';base64,' + projet.fichier2" style="max-width: 100%" alt="projet image" />
+            </a>
+            {{ projet.fichier2ContentType }}, {{ byteSize(projet.fichier2) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.projet.fichier3">Fichier 3</span></dt>
+        <dd>
+          <div *ngIf="projet.fichier3">
+            <a (click)="openFile(projet.fichier3, projet.fichier3ContentType)">
+              <img [src]="'data:' + projet.fichier3ContentType + ';base64,' + projet.fichier3" style="max-width: 100%" alt="projet image" />
+            </a>
+            {{ projet.fichier3ContentType }}, {{ byteSize(projet.fichier3) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.projet.fichier4">Fichier 4</span></dt>
+        <dd>
+          <div *ngIf="projet.fichier4">
+            <a (click)="openFile(projet.fichier4, projet.fichier4ContentType)">
+              <img [src]="'data:' + projet.fichier4ContentType + ';base64,' + projet.fichier4" style="max-width: 100%" alt="projet image" />
+            </a>
+            {{ projet.fichier4ContentType }}, {{ byteSize(projet.fichier4) }}
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/projet', projet.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

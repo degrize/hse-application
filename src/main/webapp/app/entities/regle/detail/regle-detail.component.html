@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="regle">
+      <h2 data-cy="regleDetailsHeading"><span jhiTranslate="hseApplicationApp.regle.detail.title">Regle</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ regle.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.regle.texte">Texte</span></dt>
+        <dd>
+          <span>{{ regle.texte }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.regle.date">Date</span></dt>
+        <dd>
+          <span>{{ regle.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="hseApplicationApp.regle.projet">Projet</span></dt>
+        <dd>
+          <div *ngIf="regle.projet">
+            <a [routerLink]="['/projet', regle.projet.id, 'view']">{{ regle.projet.titre }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/regle', regle.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

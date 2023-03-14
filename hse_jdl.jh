@@ -1,0 +1,69 @@
+/**
+ * Projet entity.
+ * @author MEDA.
+ */
+entity Projet {
+
+	titre String required,
+    description String,
+    duree String,
+    ville String,
+    code String,
+    /**
+     * Joindre une image au projet
+     * @author MEDA.
+    */
+    fichier1 ImageBlob,
+    fichier2 ImageBlob,
+    fichier3 ImageBlob,
+    fichier4 ImageBlob,
+}
+
+/**
+ * Regle entity.
+ * @author MEDA.
+ */
+entity Regle {
+	texte String required,
+    date Instant required
+}
+
+/**
+ * Signalement entity.
+ * @author MEDA.
+ */
+entity Signalement {
+	texte String required,
+    date Instant required
+}
+
+/**
+ * Avancement entity.
+ * @author MEDA.
+ */
+entity Avancement {
+	description String required,
+    date LocalDate required,
+    fichier1 ImageBlob,
+    fichier2 ImageBlob,
+    fichier3 ImageBlob,
+    fichier4 ImageBlob,
+}
+
+relationship ManyToOne {
+	Regle{projet(titre)} to Projet{regle(texte)},
+    Signalement{projet(titre)} to Projet{signalement(texte)},
+    Avancement{projet(titre)} to Projet{avancement(description)},
+}
+
+// Set pagination options
+paginate all with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
