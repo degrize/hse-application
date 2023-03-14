@@ -57,6 +57,16 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Column(length = 254, unique = true)
     private String email;
 
+    @Size(min = 10, max = 10)
+    @Column(name = "contact", length = 10, unique = true)
+    private String contact;
+
+    @Column(name = "ville")
+    private String ville;
+
+    @Column(name = "quartier_ou_commune")
+    private String quartierOuCommune;
+
     @NotNull
     @Column(nullable = false)
     private boolean activated = false;
@@ -140,6 +150,30 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getQuartierOuCommune() {
+        return quartierOuCommune;
+    }
+
+    public void setQuartierOuCommune(String quartierOuCommune) {
+        this.quartierOuCommune = quartierOuCommune;
     }
 
     public String getImageUrl() {
@@ -227,6 +261,9 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
+            ", contact='" + contact + '\'' +
+            ", ville='" + ville + '\'' +
+            ", quartierOuCommune='" + quartierOuCommune + '\'' +
             "}";
     }
 }

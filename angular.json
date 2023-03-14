@@ -35,8 +35,34 @@
               "src/main/webapp/manifest.webapp",
               "src/main/webapp/robots.txt"
             ],
-            "styles": ["src/main/webapp/content/scss/vendor.scss", "src/main/webapp/content/scss/global.scss"],
-            "scripts": []
+            "styles": [
+              "src/main/webapp/content/scss/vendor.scss",
+              "src/main/webapp/content/scss/global.scss",
+              "./node_modules/fullcalendar/dist/fullcalendar.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/mobius1-selectr/dist/selectr.min.css",
+              "./node_modules/@swimlane/ngx-datatable/index.css",
+              "./node_modules/@swimlane/ngx-datatable/assets/icons.css",
+              "./node_modules/@swimlane/ngx-datatable/themes/bootstrap.css",
+              "src/main/webapp/content/assets/vendor/nucleo/css/nucleo.css",
+              "src/main/webapp/content/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/main/webapp/content/assets/scss/argon.scss",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
+              "node_modules/animate.css/animate.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/tailwind-light/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
+            ],
+            "scripts": [
+              "./node_modules/chart.js/dist/Chart.min.js",
+              "./node_modules/clipboard/dist/clipboard.min.js",
+              "./node_modules/mixitup/dist/mixitup.min.js",
+              "src/main/webapp/content/js/custom-mixitup.js",
+              "src/main/webapp/content/js/swiper-bundle.min.js",
+              "src/main/webapp/content/js/custom-swipper.js",
+              "./node_modules/jquery/dist/jquery.js"
+            ]
           },
           "configurations": {
             "production": {

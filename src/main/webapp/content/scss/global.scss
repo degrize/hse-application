@@ -6,12 +6,48 @@
 Bootstrap tweaks
 ===============================================================*/
 
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #1f1d1d;
+}
+::-webkit-scrollbar-thumb {
+  background: $color-eva;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #508f0c;
+}
+
+#body_nav_dasboard.dark::-webkit-scrollbar-thumb:hover,
+#body_nav_dasboard.dark .activity-data::-webkit-scrollbar-thumb:hover {
+  background: #3a3b3c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body,
 h1,
 h2,
 h3,
 h4 {
   font-weight: 300;
+}
+
+body {
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Increase contrast of links to get 100% on Lighthouse Accessability Audit. Override this color if you want to change the link color, or use a Bootswatch theme */
@@ -237,3 +273,21 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   }
 }
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+// EVA style
+.bg-eva {
+  background-color: $color-eva;
+}
+
+.text-eva {
+  color: $color-eva;
+}
+
+.btn-eva {
+  background-color: $color-eva;
+  color: white;
+}
+
+.bg-gradient-eva {
+  background-image: linear-gradient(left, $color-eva, white);
+}
