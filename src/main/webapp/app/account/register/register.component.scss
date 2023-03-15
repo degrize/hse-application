@@ -1,0 +1,61 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~content/scss/bootstrap-variables';
+
+/* ==========================================================================
+Navbar
+========================================================================== */
+.login {
+  font-family: Geomanist, serif;
+
+  .title-connexion {
+    padding: 5px 20px;
+    background-color: $color-eva;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 5px;
+    .title-text {
+      color: white;
+      text-transform: uppercase;
+    }
+  }
+
+  .card-connexion {
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: $box-shadow;
+  }
+
+  h3 {
+    font-size: 14px;
+  }
+  .input {
+    border-radius: 15px;
+    width: 300px;
+    min-width: 200px;
+  }
+  .input[placeholder] {
+    color: black;
+    text-align: center;
+  }
+  .btn-create-compte {
+    color: $color-eva;
+  }
+
+  .ng-select.ville::ng-deep .ng-select-container {
+    min-height: 0px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .ng-select.compteDroit::ng-deep,
+  .ng-select.compteDroit::ng-deep .ng-select-container {
+    border-radius: 15px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+  }
+}

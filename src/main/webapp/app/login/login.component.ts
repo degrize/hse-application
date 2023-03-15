@@ -8,16 +8,21 @@ import { AccountService } from 'app/core/auth/account.service';
 @Component({
   selector: 'jhi-login',
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, AfterViewInit {
-  @ViewChild('username', { static: false })
-  username!: ElementRef;
+  @ViewChild('email', { static: false })
+  email!: ElementRef;
 
   authenticationError = false;
 
   loginForm = new FormGroup({
-    username: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    username: new FormControl('', { nonNullable: true }),
     password: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email],
+    }),
     rememberMe: new FormControl(false, { nonNullable: true, validators: [Validators.required] }),
   });
 
@@ -33,11 +38,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.username.nativeElement.focus();
+    this.email.nativeElement.focus();
   }
 
   login(): void {
-    this.loginService.login(this.loginForm.getRawValue()).subscribe({
+    const user = this.loginForm.getRawValue();
+    user.username = user.email;
+    this.loginService.login(user).subscribe({
       next: () => {
         this.authenticationError = false;
         if (!this.router.getCurrentNavigation()) {

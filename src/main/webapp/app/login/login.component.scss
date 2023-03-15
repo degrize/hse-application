@@ -1,0 +1,45 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~content/scss/bootstrap-variables';
+
+/* ==========================================================================
+Navbar
+========================================================================== */
+.login {
+  font-family: Geomanist;
+
+  .title-connexion {
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: $color-eva;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 5px;
+    .title-text {
+      color: white;
+      text-transform: uppercase;
+    }
+  }
+
+  .card-connexion {
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: $box-shadow;
+  }
+
+  h3 {
+    font-size: 14px;
+  }
+  .input {
+    border-radius: 15px;
+    width: 300px;
+  }
+  .input[placeholder] {
+    color: black;
+    text-align: center;
+  }
+  .btn-create-compte {
+    color: $color-eva;
+  }
+}

@@ -1,10 +1,15 @@
 package com.degrize.hseapp.web.rest;
 
+import com.degrize.hseapp.domain.User;
+import com.degrize.hseapp.repository.UserRepository;
 import com.degrize.hseapp.security.jwt.JWTFilter;
 import com.degrize.hseapp.security.jwt.TokenProvider;
+import com.degrize.hseapp.service.UserService;
 import com.degrize.hseapp.web.rest.vm.LoginVM;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Optional;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +30,9 @@ public class UserJWTController {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public UserJWTController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
@@ -32,6 +40,8 @@ public class UserJWTController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM) {
+        Optional<User> login = userRepository.findOneByEmailIgnoreCase(loginVM.getEmail());
+        login.ifPresent(user -> loginVM.setUsername(user.getLogin()));
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
             loginVM.getUsername(),
             loginVM.getPassword()

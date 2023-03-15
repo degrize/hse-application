@@ -37,8 +37,8 @@
       "language": "Langue"
     },
     "form": {
-      "username.label": "Nom d'utilisateur",
-      "username.placeholder": "Votre nom d'utilisateur",
+      "username.label": "Login",
+      "username.placeholder": "LOGIN",
       "currentpassword.label": "Mot de passe actuel",
       "currentpassword.placeholder": "Mot de passe actuel",
       "newpassword.label": "Nouveau mot de passe",
@@ -46,7 +46,7 @@
       "confirmpassword.label": "Confirmation du nouveau mot de passe",
       "confirmpassword.placeholder": "Confirmation du nouveau mot de passe",
       "email.label": "Email",
-      "email.placeholder": "Votre email"
+      "email.placeholder": "EMAIL"
     },
     "messages": {
       "info": {
@@ -89,7 +89,16 @@
     "ribbon": {
       "dev": "Développement"
     },
-    "item-count": "Affichage {{first}} - {{second}} de {{total}} items."
+    "item-count": "Affichage {{first}} - {{second}} de {{total}} items.",
+    "authority": {
+      "ROLE_ADMIN": "Administrateur",
+      "ROLE_USER": "Utilisateur",
+      "ROLE_SPECIALISTE_EN_ENVIRONNEMENT_ET_SOCIAL": "Spécialiste en...",
+      "ROLE_MISSION_DE_CONTROLE": "Mission de contrôle",
+      "ROLE_RESPONSABLE_HSE": "Responsable HSE",
+      "ROLE_OUVRIER": "Ouvrier",
+      "ROLE_RIVERAIN": "Riverain"
+    }
   },
   "entity": {
     "action": {

@@ -33,6 +33,10 @@ public class AdminUserDTO implements Serializable {
     @Size(min = 5, max = 254)
     private String email;
 
+    private String contact;
+    private String ville;
+    private String quartierOuCommune;
+
     @Size(max = 256)
     private String imageUrl;
 
@@ -61,6 +65,9 @@ public class AdminUserDTO implements Serializable {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
+        this.contact = user.getContact();
+        this.ville = user.getVille();
+        this.quartierOuCommune = user.getQuartierOuCommune();
         this.activated = user.isActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
@@ -109,6 +116,30 @@ public class AdminUserDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getQuartierOuCommune() {
+        return quartierOuCommune;
+    }
+
+    public void setQuartierOuCommune(String quartierOuCommune) {
+        this.quartierOuCommune = quartierOuCommune;
     }
 
     public String getImageUrl() {
@@ -191,6 +222,9 @@ public class AdminUserDTO implements Serializable {
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
+            ", contact=" + contact +
+            ", ville=" + ville +
+            ", quartierOuCommune=" + quartierOuCommune +
             "}";
     }
 }

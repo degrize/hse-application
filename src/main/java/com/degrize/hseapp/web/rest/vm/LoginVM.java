@@ -13,6 +13,10 @@ public class LoginVM {
     private String username;
 
     @NotNull
+    @Size(min = 5, max = 255)
+    private String email;
+
+    @NotNull
     @Size(min = 4, max = 100)
     private String password;
 
@@ -24,6 +28,14 @@ public class LoginVM {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -47,6 +59,7 @@ public class LoginVM {
     public String toString() {
         return "LoginVM{" +
             "username='" + username + '\'' +
+            "email='" + email + '\'' +
             ", rememberMe=" + rememberMe +
             '}';
     }
