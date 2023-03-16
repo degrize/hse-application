@@ -74,24 +74,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="fichier2">
-            <div class="d-flex">
-              <span jhiTranslate="hseApplicationApp.projet.fichier2">Fichier 2</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="fichier3">
-            <div class="d-flex">
-              <span jhiTranslate="hseApplicationApp.projet.fichier3">Fichier 3</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="fichier4">
-            <div class="d-flex">
-              <span jhiTranslate="hseApplicationApp.projet.fichier4">Fichier 4</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -115,36 +97,7 @@
             </a>
             <span *ngIf="projet.fichier1">{{ projet.fichier1ContentType }}, {{ byteSize(projet.fichier1) }}</span>
           </td>
-          <td>
-            <a *ngIf="projet.fichier2" (click)="openFile(projet.fichier2, projet.fichier2ContentType)">
-              <img
-                [src]="'data:' + projet.fichier2ContentType + ';base64,' + projet.fichier2"
-                style="max-height: 30px"
-                alt="projet image"
-              />
-            </a>
-            <span *ngIf="projet.fichier2">{{ projet.fichier2ContentType }}, {{ byteSize(projet.fichier2) }}</span>
-          </td>
-          <td>
-            <a *ngIf="projet.fichier3" (click)="openFile(projet.fichier3, projet.fichier3ContentType)">
-              <img
-                [src]="'data:' + projet.fichier3ContentType + ';base64,' + projet.fichier3"
-                style="max-height: 30px"
-                alt="projet image"
-              />
-            </a>
-            <span *ngIf="projet.fichier3">{{ projet.fichier3ContentType }}, {{ byteSize(projet.fichier3) }}</span>
-          </td>
-          <td>
-            <a *ngIf="projet.fichier4" (click)="openFile(projet.fichier4, projet.fichier4ContentType)">
-              <img
-                [src]="'data:' + projet.fichier4ContentType + ';base64,' + projet.fichier4"
-                style="max-height: 30px"
-                alt="projet image"
-              />
-            </a>
-            <span *ngIf="projet.fichier4">{{ projet.fichier4ContentType }}, {{ byteSize(projet.fichier4) }}</span>
-          </td>
+
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/projet', projet.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

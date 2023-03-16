@@ -8,57 +8,131 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="hseApplicationApp.projet.titre" for="field_titre">Titre</label>
-          <input type="text" class="form-control" name="titre" id="field_titre" data-cy="titre" formControlName="titre" />
-          <div *ngIf="editForm.get('titre')!.invalid && (editForm.get('titre')!.dirty || editForm.get('titre')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('titre')?.errors?.required" jhiTranslate="entity.validation.required">
-              Ce champ est obligatoire.
-            </small>
+        <div class="d-flex align-items-center justify-content-between mb-3" *ngIf="editForm.controls.id.value !== null">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          </div>
+          <div class="colonneInput">
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="hseApplicationApp.projet.description" for="field_description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            name="description"
-            id="field_description"
-            data-cy="description"
-            formControlName="description"
-          />
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.projet.titre" for="field_titre">Titre</label>
+          </div>
+          <div class="colonneInput">
+            <input type="text" class="form-control" name="titre" id="field_titre" data-cy="titre" formControlName="titre" />
+            <div *ngIf="editForm.get('titre')!.invalid && (editForm.get('titre')!.dirty || editForm.get('titre')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('titre')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                Ce champ est obligatoire.
+              </small>
+            </div>
+          </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="hseApplicationApp.projet.duree" for="field_duree">Duree</label>
-          <input type="text" class="form-control" name="duree" id="field_duree" data-cy="duree" formControlName="duree" />
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.projet.description" for="field_description">Description</label>
+          </div>
+          <div class="colonneInput">
+            <textarea
+              type="text"
+              class="form-control"
+              name="description"
+              id="field_description"
+              data-cy="description"
+              rows="4"
+              formControlName="description"
+            >
+            </textarea>
+          </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="hseApplicationApp.projet.ville" for="field_ville">Ville</label>
-          <input type="text" class="form-control" name="ville" id="field_ville" data-cy="ville" formControlName="ville" />
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.projet.duree" for="field_duree">Duree</label>
+          </div>
+          <div class="colonneInput">
+            <div class="input-group d-flex justify-content-between w-60">
+              <div class="input-group-prepend">
+                <input type="number" name="duree" id="field_duree" data-cy="duree" formControlName="duree" class="w-5rem form-control" />
+              </div>
+              <ng-select name="uniteDuree" class="w-11rem input" formControlName="uniteDuree" placeholder="UNITÉ" data-cy="uniteDuree">
+                <ng-option value="Mois">MOIS</ng-option>
+                <ng-option value="Année">ANNÉE</ng-option>
+              </ng-select>
+            </div>
+            <!--            <input type="text" class="form-control" name="duree" id="field_duree" data-cy="duree" formControlName="duree" />-->
+          </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="hseApplicationApp.projet.code" for="field_code">Code</label>
-          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.projet.ville" for="field_ville">Ville</label>
+          </div>
+          <div class="colonneInput">
+            <ng-select name="ville" class="w-60" formControlName="ville" placeholder="ville" id="field_ville" data-cy="ville">
+              <ng-option *ngFor="let ville of villesList" [value]="ville.ville">
+                {{ ville.ville }}
+              </ng-option>
+            </ng-select>
+          </div>
         </div>
 
-        <div class="row mb-3">
-          <label
-            class="form-label"
-            jhiTranslate="hseApplicationApp.projet.fichier1"
-            for="field_fichier1"
-            [ngbTooltip]="'hseApplicationApp.projet.help.fichier1' | translate"
-            >Fichier 1</label
-          >
-          <div>
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.projet.code" for="field_code">Code</label>
+          </div>
+          <div class="colonneInput">
+            <input type="text" class="form-control w-60" name="code" id="field_code" data-cy="code" formControlName="code" />
+            <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> Le code du projet est requis. </small>
+
+              <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.minlength">
+                Le code doit contenir au moins 4 caractères.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" for="field_isDone">Le projet est-il Terminé?</label>
+          </div>
+          <div class="colonneInput">
+            <ng-select
+              name="isDone"
+              class="w-60"
+              formControlName="isDone"
+              placeholder="Réponse"
+              id="field_isDone"
+              data-cy="isDone"
+              [readonly]="editForm.controls.id.value === null"
+            >
+              <ng-option [value]="true">OUI</ng-option>
+              <ng-option [value]="false">NON</ng-option>
+            </ng-select>
+          </div>
+        </div>
+        <hr />
+        <p class="underline font-bold">Ajouter au moins une image (Le fichier 1)</p>
+
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label
+              class="form-label"
+              jhiTranslate="hseApplicationApp.projet.fichier1"
+              for="field_fichier1"
+              [ngbTooltip]="'hseApplicationApp.projet.help.fichier1' | translate"
+              >Fichier 1</label
+            >
+          </div>
+          <div class="colonneInput d-flex align-items-center">
             <img
               [src]="'data:' + editForm.get('fichier1ContentType')!.value + ';base64,' + editForm.get('fichier1')!.value"
               style="max-height: 100px"
@@ -79,6 +153,7 @@
             </div>
             <input
               type="file"
+              class="btn"
               id="file_fichier1"
               data-cy="fichier1"
               (change)="setFileData($event, 'fichier1', true)"
@@ -96,9 +171,11 @@
           />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="hseApplicationApp.projet.fichier2" for="field_fichier2">Fichier 2</label>
-          <div>
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.projet.fichier2" for="field_fichier2">Fichier 2</label>
+          </div>
+          <div class="colonneInput d-flex align-items-center">
             <img
               [src]="'data:' + editForm.get('fichier2ContentType')!.value + ';base64,' + editForm.get('fichier2')!.value"
               style="max-height: 100px"
@@ -120,6 +197,7 @@
             <input
               type="file"
               id="file_fichier2"
+              class="btn"
               data-cy="fichier2"
               (change)="setFileData($event, 'fichier2', true)"
               accept="image/*"
@@ -136,9 +214,11 @@
           />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="hseApplicationApp.projet.fichier3" for="field_fichier3">Fichier 3</label>
-          <div>
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.projet.fichier3" for="field_fichier3">Fichier 3</label>
+          </div>
+          <div class="colonneInput d-flex align-items-center">
             <img
               [src]="'data:' + editForm.get('fichier3ContentType')!.value + ';base64,' + editForm.get('fichier3')!.value"
               style="max-height: 100px"
@@ -159,6 +239,7 @@
             </div>
             <input
               type="file"
+              class="btn"
               id="file_fichier3"
               data-cy="fichier3"
               (change)="setFileData($event, 'fichier3', true)"
@@ -176,9 +257,11 @@
           />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="hseApplicationApp.projet.fichier4" for="field_fichier4">Fichier 4</label>
-          <div>
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.projet.fichier4" for="field_fichier4">Fichier 4</label>
+          </div>
+          <div class="colonneInput d-flex align-items-center">
             <img
               [src]="'data:' + editForm.get('fichier4ContentType')!.value + ';base64,' + editForm.get('fichier4')!.value"
               style="max-height: 100px"
@@ -199,6 +282,7 @@
             </div>
             <input
               type="file"
+              class="btn"
               id="file_fichier4"
               data-cy="fichier4"
               (change)="setFileData($event, 'fichier4', true)"

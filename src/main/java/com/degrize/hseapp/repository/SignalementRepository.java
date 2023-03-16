@@ -1,5 +1,6 @@
 package com.degrize.hseapp.repository;
 
+import com.degrize.hseapp.domain.Regle;
 import com.degrize.hseapp.domain.Signalement;
 import java.util.List;
 import java.util.Optional;
@@ -37,4 +38,7 @@ public interface SignalementRepository extends JpaRepository<Signalement, Long> 
 
     @Query("select signalement from Signalement signalement left join fetch signalement.projet where signalement.id =:id")
     Optional<Signalement> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query("select signalement from Signalement signalement left join fetch signalement.projet where signalement.projet.id =:id")
+    List<Signalement> findAllByProjetId(@Param("id") Long id);
 }

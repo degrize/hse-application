@@ -11,8 +11,8 @@ import { AccountService } from 'app/core/auth/account.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, AfterViewInit {
-  @ViewChild('email', { static: false })
-  email!: ElementRef;
+  // @ViewChild('email', { static: false })
+  // email!: ElementRef;
 
   authenticationError = false;
 
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.email.nativeElement.focus();
+    // this.email.nativeElement.focus();
   }
 
   login(): void {

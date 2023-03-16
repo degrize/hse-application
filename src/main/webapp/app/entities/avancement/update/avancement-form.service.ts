@@ -29,6 +29,7 @@ type AvancementFormGroupContent = {
   fichier4: FormControl<IAvancement['fichier4']>;
   fichier4ContentType: FormControl<IAvancement['fichier4ContentType']>;
   projet: FormControl<IAvancement['projet']>;
+  code: FormControl<IAvancement['code']>;
 };
 
 export type AvancementFormGroup = FormGroup<AvancementFormGroupContent>;
@@ -63,6 +64,7 @@ export class AvancementFormService {
       fichier4: new FormControl(avancementRawValue.fichier4),
       fichier4ContentType: new FormControl(avancementRawValue.fichier4ContentType),
       projet: new FormControl(avancementRawValue.projet),
+      code: new FormControl(avancementRawValue.code),
     });
   }
 

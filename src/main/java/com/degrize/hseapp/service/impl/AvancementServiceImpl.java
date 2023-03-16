@@ -1,10 +1,12 @@
 package com.degrize.hseapp.service.impl;
 
 import com.degrize.hseapp.domain.Avancement;
+import com.degrize.hseapp.domain.Signalement;
 import com.degrize.hseapp.repository.AvancementRepository;
 import com.degrize.hseapp.service.AvancementService;
 import com.degrize.hseapp.service.dto.AvancementDTO;
 import com.degrize.hseapp.service.mapper.AvancementMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,5 +86,11 @@ public class AvancementServiceImpl implements AvancementService {
     public void delete(Long id) {
         log.debug("Request to delete Avancement : {}", id);
         avancementRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Avancement> findAllByProjetId(Long id) {
+        log.debug("Request to get list Avancement of Projets");
+        return avancementRepository.findAllByProjetId(id);
     }
 }

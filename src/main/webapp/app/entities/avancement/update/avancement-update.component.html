@@ -234,6 +234,22 @@
             <option [ngValue]="projetOption" *ngFor="let projetOption of projetsSharedCollection">{{ projetOption.titre }}</option>
           </select>
         </div>
+
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.projet.code" for="field_code">Code</label>
+          </div>
+          <div class="colonneInput">
+            <input type="text" class="form-control w-60" name="code" id="field_code" data-cy="code" formControlName="code" />
+            <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> Le code du projet est requis. </small>
+
+              <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.minlength">
+                Le code doit contenir au moins 4 caractères.
+              </small>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div>

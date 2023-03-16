@@ -5,6 +5,7 @@ import com.degrize.hseapp.repository.RegleRepository;
 import com.degrize.hseapp.service.RegleService;
 import com.degrize.hseapp.service.dto.RegleDTO;
 import com.degrize.hseapp.service.mapper.RegleMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,5 +85,11 @@ public class RegleServiceImpl implements RegleService {
     public void delete(Long id) {
         log.debug("Request to delete Regle : {}", id);
         regleRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Regle> findAllByProjetId(Long id) {
+        log.debug("Request to get list Regles of Projets");
+        return regleRepository.findAllByProjetId(id);
     }
 }

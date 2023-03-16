@@ -13,6 +13,9 @@ import { SortByDirective } from './sort/sort-by.directive';
 import { SortDirective } from './sort/sort.directive';
 import { ItemCountComponent } from './pagination/item-count.component';
 import { FilterComponent } from './filter/filter.component';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { UsernamePipe } from './pipes/username.pipe';
+import { ShortenPipe } from './pipes/shorten.pipe';
 
 @NgModule({
   imports: [SharedLibsModule],
@@ -29,6 +32,9 @@ import { FilterComponent } from './filter/filter.component';
     SortDirective,
     ItemCountComponent,
     FilterComponent,
+    TimeAgoPipe,
+    ShortenPipe,
+    UsernamePipe,
   ],
   exports: [
     SharedLibsModule,
@@ -44,6 +50,9 @@ import { FilterComponent } from './filter/filter.component';
     SortDirective,
     ItemCountComponent,
     FilterComponent,
+    TimeAgoPipe,
+    ShortenPipe,
+    UsernamePipe,
   ],
 })
 export class SharedModule {}

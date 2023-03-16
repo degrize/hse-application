@@ -1,0 +1,38 @@
+<ng-container *ngIf="projetsList.length > 0">
+  <p-carousel [value]="projetsList" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+    <ng-template pTemplate="header">
+      <h2 class="bg-eva text-white text-left pl-3">{{ categorie.ville }}</h2>
+    </ng-template>
+
+    <ng-template let-projetItem pTemplate="item">
+      <ng-container *ngIf="projetItem.ville.toLowerCase() === categorie.ville.toLowerCase()">
+        <div class="product-item">
+          <a [href]="['/projet/' + projetItem.id + '/view']">
+            <div class="product-item-content">
+              <div>
+                <img
+                  class="card-img-top card-image product-image"
+                  [src]="'data:' + projetItem?.fichier1ContentType + ';base64,' + projetItem?.fichier1"
+                  alt="Card image cap"
+                  width="300px"
+                />
+              </div>
+              <div>
+                <h4 class="p-mb-1">
+                  {{ (projetItem?.titre + '').toLowerCase() | shorten: 10 }}
+                  <span class="small"> / {{ projetItem?.duree }}</span>
+                </h4>
+                <h6 class="p-mt-0 p-mb-3">
+                  {{ (projetItem?.description + '').toLowerCase() | shorten: 20 }}
+                </h6>
+                <div class="d-flex justify-content-between px-3">
+                  <button class="btn bg-dark text-white">Voir</button>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </ng-container>
+    </ng-template>
+  </p-carousel>
+</ng-container>

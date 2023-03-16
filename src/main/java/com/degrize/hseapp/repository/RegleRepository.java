@@ -37,4 +37,7 @@ public interface RegleRepository extends JpaRepository<Regle, Long> {
 
     @Query("select regle from Regle regle left join fetch regle.projet where regle.id =:id")
     Optional<Regle> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query("select regle from Regle regle left join fetch regle.projet where regle.projet.id =:id")
+    List<Regle> findAllByProjetId(@Param("id") Long id);
 }

@@ -1,6 +1,7 @@
 package com.degrize.hseapp.repository;
 
 import com.degrize.hseapp.domain.Avancement;
+import com.degrize.hseapp.domain.Signalement;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -37,4 +38,7 @@ public interface AvancementRepository extends JpaRepository<Avancement, Long> {
 
     @Query("select avancement from Avancement avancement left join fetch avancement.projet where avancement.id =:id")
     Optional<Avancement> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query("select avancement from Avancement avancement left join fetch avancement.projet where avancement.projet.id =:id")
+    List<Avancement> findAllByProjetId(@Param("id") Long id);
 }

@@ -39,6 +39,10 @@ export class ProjetService {
     return this.http.get<IProjet[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  getProjetList(): Observable<HttpResponse<any>> {
+    return this.http.get<IProjet[]>(`${this.resourceUrl}/liste`, { observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

@@ -1,0 +1,63 @@
+<div [ngSwitch]="account !== null">
+  <div class="grid grid-nogutter surface-section text-800">
+    <div class="md:col-6 p-6 text-center md:text-left flex align-items-center">
+      <section>
+        <span class="block text-2xl font-bold mb-1">QHSE en Afrique</span>
+        <div class="text-2xl text-primary font-bold mb-3">Partout dans le continent</div>
+        <p class="mt-0 mb-4 text-700 line-height-3">
+          C'est avec facilité et simplicité que vous avez la possibilité de créer projet, le suivre, le maintenir jusqu'a son terme
+        </p>
+
+        <button
+          pButton
+          pRipple
+          label="Commencer"
+          *ngSwitchCase="false"
+          routerLink="/login"
+          type="button"
+          class="mr-3 p-button-raised p-button-success button-start"
+        ></button>
+        <button
+          pButton
+          pRipple
+          label="S'inscrire"
+          *ngSwitchCase="false"
+          routerLink="/account/register"
+          type="button"
+          class="p-button-outlined p-button-success button-login"
+        ></button>
+        <button
+          pButton
+          pRipple
+          label="Créer un projet"
+          *jhiHasAnyAuthority="'MISSION_DE_CONTROLE'"
+          routerLink="/liste-annonces"
+          type="button"
+          class="p-button-outlined p-button-success button-start"
+        ></button>
+      </section>
+    </div>
+    <div class="md:col-6 overflow-hidden">
+      <p-carousel
+        [value]="imagesList"
+        [autoplayInterval]="3000"
+        orientation="vertical"
+        [style]="{ 'max-width': '400px', 'margin-top': '2em' }"
+        [circular]="true"
+        verticalViewPortHeight="352px"
+        [numVisible]="1"
+        [numScroll]="1"
+      >
+        <ng-template let-image pTemplate="item">
+          <div class="product-item">
+            <div class="product-item-content">
+              <div class="mb-3">
+                <img src="../../../content/assets/img/hse/{{ image }}" class="product-image" />
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+</div>

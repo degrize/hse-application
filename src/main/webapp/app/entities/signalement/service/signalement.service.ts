@@ -8,6 +8,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { ISignalement, NewSignalement } from '../signalement.model';
+import { IProjet } from '../../projet/projet.model';
 
 export type PartialUpdateSignalement = Partial<ISignalement> & Pick<ISignalement, 'id'>;
 
@@ -62,6 +63,10 @@ export class SignalementService {
     return this.http
       .get<RestSignalement[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map(res => this.convertResponseArrayFromServer(res)));
+  }
+
+  getListByProjetId(id: number): Observable<HttpResponse<any>> {
+    return this.http.get<IProjet[]>(`${this.resourceUrl}/listeByProjetId/${id}`, { observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

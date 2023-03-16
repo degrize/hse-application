@@ -3,6 +3,7 @@ export interface IProjet {
   titre?: string | null;
   description?: string | null;
   duree?: string | null;
+  uniteDuree?: string | null;
   ville?: string | null;
   code?: string | null;
   fichier1?: string | null;
@@ -13,6 +14,7 @@ export interface IProjet {
   fichier3ContentType?: string | null;
   fichier4?: string | null;
   fichier4ContentType?: string | null;
+  isDone?: boolean | null;
 }
 
 export type NewProjet = Omit<IProjet, 'id'> & { id: null };

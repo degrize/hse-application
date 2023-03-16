@@ -1,5 +1,7 @@
 package com.degrize.hseapp.web.rest;
 
+import com.degrize.hseapp.domain.Avancement;
+import com.degrize.hseapp.domain.Regle;
 import com.degrize.hseapp.repository.AvancementRepository;
 import com.degrize.hseapp.service.AvancementService;
 import com.degrize.hseapp.service.dto.AvancementDTO;
@@ -188,5 +190,12 @@ public class AvancementResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/avancements/listeByProjetId/{id}")
+    public ResponseEntity<List<Avancement>> getAllByProjetId(@PathVariable Long id) {
+        log.debug("REST request to get list of avancement of Projets ");
+        List<Avancement> avancementList = avancementService.findAllByProjetId(id);
+        return ResponseEntity.ok().body(avancementList);
     }
 }

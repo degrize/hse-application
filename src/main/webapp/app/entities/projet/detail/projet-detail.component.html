@@ -1,7 +1,36 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="projet">
-      <h2 data-cy="projetDetailsHeading"><span jhiTranslate="hseApplicationApp.projet.detail.title">Projet</span></h2>
+      <div class="d-flex justify-content-start">
+        <h2 data-cy="projetDetailsHeading" class="mr-3"><span jhiTranslate="hseApplicationApp.projet.detail.title">Projet</span></h2>
+        <button
+          *jhiHasAnyAuthority="'ROLE_SPECIALISTE_EN_ENVIRONNEMENT_ET_SOCIAL'"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity create-regle"
+          (click)="saveProjetSelected('/regle/new')"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span jhiTranslate="hseApplicationApp.regle.home.createLabel"> Créer une nouvelle Règle </span>
+        </button>
+        <button
+          *jhiHasAnyAuthority="'ROLE_OUVRIER'"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity"
+          (click)="saveProjetSelected('/avancement/new')"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span jhiTranslate="hseApplicationApp.avancement.home.createLabel"> Créer un avancement </span>
+        </button>
+        <button
+          *jhiHasAnyAuthority="'ROLE_RIVERAIN'"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity"
+          (click)="saveProjetSelected('/signalement/new')"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span jhiTranslate="hseApplicationApp.signalement.home.createLabel"> Créer une nouvelle Signalement </span>
+        </button>
+      </div>
 
       <hr />
 
@@ -10,79 +39,163 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dt class="colonneLabel"><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd class="colonneInput">
           <span>{{ projet.id }}</span>
         </dd>
-        <dt><span jhiTranslate="hseApplicationApp.projet.titre">Titre</span></dt>
-        <dd>
+        <dt class="colonneLabel"><span jhiTranslate="hseApplicationApp.projet.titre">Titre</span></dt>
+        <dd class="colonneInput">
           <span>{{ projet.titre }}</span>
         </dd>
-        <dt><span jhiTranslate="hseApplicationApp.projet.description">Description</span></dt>
-        <dd>
+        <dt class="colonneLabel"><span jhiTranslate="hseApplicationApp.projet.description">Description</span></dt>
+        <dd class="colonneInput">
           <span>{{ projet.description }}</span>
         </dd>
-        <dt><span jhiTranslate="hseApplicationApp.projet.duree">Duree</span></dt>
-        <dd>
+        <dt class="colonneLabel"><span jhiTranslate="hseApplicationApp.projet.duree">Duree</span></dt>
+        <dd class="colonneInput">
           <span>{{ projet.duree }}</span>
         </dd>
-        <dt><span jhiTranslate="hseApplicationApp.projet.ville">Ville</span></dt>
-        <dd>
+        <dt class="colonneLabel"><span jhiTranslate="hseApplicationApp.projet.ville">Ville</span></dt>
+        <dd class="colonneInput">
           <span>{{ projet.ville }}</span>
         </dd>
-        <dt><span jhiTranslate="hseApplicationApp.projet.code">Code</span></dt>
-        <dd>
+        <dt class="colonneLabel"><span jhiTranslate="hseApplicationApp.projet.code">Code</span></dt>
+        <dd class="colonneInput">
           <span>{{ projet.code }}</span>
         </dd>
-        <dt>
+        <dt class="colonneLabel">
           <span jhiTranslate="hseApplicationApp.projet.fichier1" [ngbTooltip]="'hseApplicationApp.projet.help.fichier1' | translate"
             >Fichier 1</span
           >
         </dt>
-        <dd>
+        <dd class="colonneInput">
           <div *ngIf="projet.fichier1">
             <a (click)="openFile(projet.fichier1, projet.fichier1ContentType)">
-              <img [src]="'data:' + projet.fichier1ContentType + ';base64,' + projet.fichier1" style="max-width: 100%" alt="projet image" />
+              <img
+                [src]="'data:' + projet.fichier1ContentType + ';base64,' + projet.fichier1"
+                style="max-width: 100px"
+                alt="projet image"
+              />
             </a>
-            {{ projet.fichier1ContentType }}, {{ byteSize(projet.fichier1) }}
           </div>
         </dd>
-        <dt><span jhiTranslate="hseApplicationApp.projet.fichier2">Fichier 2</span></dt>
-        <dd>
+        <dt class="colonneLabel"><span jhiTranslate="hseApplicationApp.projet.fichier2">Fichier 2</span></dt>
+        <dd class="colonneInput">
           <div *ngIf="projet.fichier2">
             <a (click)="openFile(projet.fichier2, projet.fichier2ContentType)">
-              <img [src]="'data:' + projet.fichier2ContentType + ';base64,' + projet.fichier2" style="max-width: 100%" alt="projet image" />
+              <img
+                [src]="'data:' + projet.fichier2ContentType + ';base64,' + projet.fichier2"
+                style="max-width: 150px"
+                alt="projet image"
+              />
             </a>
             {{ projet.fichier2ContentType }}, {{ byteSize(projet.fichier2) }}
           </div>
         </dd>
-        <dt><span jhiTranslate="hseApplicationApp.projet.fichier3">Fichier 3</span></dt>
-        <dd>
+        <dt class="colonneLabel"><span jhiTranslate="hseApplicationApp.projet.fichier3">Fichier 3</span></dt>
+        <dd class="colonneInput">
           <div *ngIf="projet.fichier3">
             <a (click)="openFile(projet.fichier3, projet.fichier3ContentType)">
-              <img [src]="'data:' + projet.fichier3ContentType + ';base64,' + projet.fichier3" style="max-width: 100%" alt="projet image" />
+              <img
+                [src]="'data:' + projet.fichier3ContentType + ';base64,' + projet.fichier3"
+                style="max-width: 150px"
+                alt="projet image"
+              />
             </a>
             {{ projet.fichier3ContentType }}, {{ byteSize(projet.fichier3) }}
           </div>
         </dd>
-        <dt><span jhiTranslate="hseApplicationApp.projet.fichier4">Fichier 4</span></dt>
-        <dd>
+        <dt class="colonneLabel"><span jhiTranslate="hseApplicationApp.projet.fichier4">Fichier 4</span></dt>
+        <dd class="colonneInput">
           <div *ngIf="projet.fichier4">
             <a (click)="openFile(projet.fichier4, projet.fichier4ContentType)">
-              <img [src]="'data:' + projet.fichier4ContentType + ';base64,' + projet.fichier4" style="max-width: 100%" alt="projet image" />
+              <img
+                [src]="'data:' + projet.fichier4ContentType + ';base64,' + projet.fichier4"
+                style="max-width: 150px"
+                alt="projet image"
+              />
             </a>
             {{ projet.fichier4ContentType }}, {{ byteSize(projet.fichier4) }}
           </div>
         </dd>
       </dl>
 
+      <div>
+        <section>
+          <h2><span>ENTITES</span></h2>
+          <p-accordion [multiple]="true">
+            <p-accordionTab header="Règles">
+              <ng-container *ngFor="let regle of regles">
+                <ul class="my-3">
+                  <li>Date : {{ regle.date }}</li>
+                  <li>Texte : {{ regle.texte }}</li>
+                </ul>
+                <hr />
+              </ng-container>
+            </p-accordionTab>
+            <p-accordionTab header="Avancements">
+              <div class="d-flex justify-content-between align-items-center">
+                <ng-container *ngFor="let avancement of avancements">
+                  <ul class="my-3">
+                    <li>Date : {{ avancement.date }}</li>
+                    <li>Texte : {{ avancement.description }}</li>
+                  </ul>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div *ngIf="avancement.fichier1">
+                      <a (click)="openFile(avancement.fichier1, avancement.fichier1ContentType)">
+                        <img
+                          [src]="'data:' + avancement.fichier1ContentType + ';base64,' + avancement.fichier1"
+                          style="max-width: 100px; max-height: 50px"
+                          alt="projet image"
+                        />
+                      </a>
+                    </div>
+                    <div *ngIf="avancement.fichier2">
+                      <a (click)="openFile(avancement.fichier2, avancement.fichier2ContentType)">
+                        <img
+                          [src]="'data:' + avancement.fichier2ContentType + ';base64,' + avancement.fichier2"
+                          style="max-width: 100px; max-height: 50px"
+                          alt="projet image"
+                        />
+                      </a>
+                    </div>
+
+                    <div *ngIf="avancement.fichier3">
+                      <a (click)="openFile(avancement.fichier3, avancement.fichier3ContentType)">
+                        <img
+                          [src]="'data:' + avancement.fichier3ContentType + ';base64,' + avancement.fichier3"
+                          style="max-width: 100px; max-height: 50px"
+                          alt="projet image"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </p-accordionTab>
+
+            <p-accordionTab header="Signalements">
+              <div class="d-flex justify-content-between align-items-center">
+                <ng-container *ngFor="let signalement of signalements">
+                  <ul class="my-3">
+                    <li>Date : {{ signalement.date }}</li>
+                    <li>Texte : {{ signalement.texte }}</li>
+                  </ul>
+                  <hr />
+                </ng-container>
+              </div>
+            </p-accordionTab>
+          </p-accordion>
+        </section>
+      </div>
+
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
       </button>
 
-      <button type="button" [routerLink]="['/projet', projet.id, 'edit']" class="btn btn-primary">
+      <!--<button type="button" [routerLink]="['/projet', projet.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
-      </button>
+      </button>-->
     </div>
   </div>
 </div>

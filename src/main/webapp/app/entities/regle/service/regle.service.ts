@@ -8,6 +8,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IRegle, NewRegle } from '../regle.model';
+import { IProjet } from '../../projet/projet.model';
 
 export type PartialUpdateRegle = Partial<IRegle> & Pick<IRegle, 'id'>;
 
@@ -53,6 +54,10 @@ export class RegleService {
     return this.http
       .get<RestRegle>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
+  }
+
+  getListByProjetId(id: number): Observable<HttpResponse<any>> {
+    return this.http.get<IProjet[]>(`${this.resourceUrl}/listeByProjetId/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

@@ -1,10 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { ProjetService } from '../entities/projet/service/projet.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IProjet } from '../entities/projet/projet.model';
+import { HttpResponse } from '@angular/common/http';
+
+import villes from '../../content/villes.json';
+import Swal from 'sweetalert2';
+import List from 'list.js';
 
 @Component({
   selector: 'jhi-home',
@@ -13,10 +21,11 @@ import { Account } from 'app/core/auth/account.model';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
+  categories?: { ville: string }[] = villes;
 
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(private accountService: AccountService, private router: Router, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.accountService

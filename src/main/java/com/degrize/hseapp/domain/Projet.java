@@ -36,6 +36,9 @@ public class Projet implements Serializable {
     @Column(name = "duree")
     private String duree;
 
+    @Column(name = "unite_duree")
+    private String uniteDuree;
+
     @Column(name = "ville")
     private String ville;
 
@@ -72,6 +75,9 @@ public class Projet implements Serializable {
 
     @Column(name = "fichier_4_content_type")
     private String fichier4ContentType;
+
+    @Column(name = "is_done")
+    private Boolean isDone;
 
     @OneToMany(mappedBy = "projet")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -140,6 +146,14 @@ public class Projet implements Serializable {
 
     public void setDuree(String duree) {
         this.duree = duree;
+    }
+
+    public String getUniteDuree() {
+        return uniteDuree;
+    }
+
+    public void setUniteDuree(String uniteDuree) {
+        this.uniteDuree = uniteDuree;
     }
 
     public String getVille() {
@@ -266,6 +280,14 @@ public class Projet implements Serializable {
     public Projet fichier4ContentType(String fichier4ContentType) {
         this.fichier4ContentType = fichier4ContentType;
         return this;
+    }
+
+    public Boolean getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(Boolean done) {
+        isDone = done;
     }
 
     public void setFichier4ContentType(String fichier4ContentType) {
@@ -402,6 +424,8 @@ public class Projet implements Serializable {
             ", fichier3ContentType='" + getFichier3ContentType() + "'" +
             ", fichier4='" + getFichier4() + "'" +
             ", fichier4ContentType='" + getFichier4ContentType() + "'" +
+            ", isDone='" + getIsDone() + "'" +
+            ", uniteDuree='" + getUniteDuree() + "'" +
             "}";
     }
 }

@@ -34,6 +34,7 @@ type RegleFormGroupContent = {
   texte: FormControl<RegleFormRawValue['texte']>;
   date: FormControl<RegleFormRawValue['date']>;
   projet: FormControl<RegleFormRawValue['projet']>;
+  code: FormControl<RegleFormRawValue['code']>;
 };
 
 export type RegleFormGroup = FormGroup<RegleFormGroupContent>;
@@ -60,6 +61,9 @@ export class RegleFormService {
         validators: [Validators.required],
       }),
       projet: new FormControl(regleRawValue.projet),
+      code: new FormControl(regleRawValue.code, {
+        validators: [Validators.required],
+      }),
     });
   }
 

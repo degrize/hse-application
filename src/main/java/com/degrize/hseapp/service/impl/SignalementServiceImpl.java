@@ -1,10 +1,13 @@
 package com.degrize.hseapp.service.impl;
 
+import com.degrize.hseapp.domain.Avancement;
+import com.degrize.hseapp.domain.Regle;
 import com.degrize.hseapp.domain.Signalement;
 import com.degrize.hseapp.repository.SignalementRepository;
 import com.degrize.hseapp.service.SignalementService;
 import com.degrize.hseapp.service.dto.SignalementDTO;
 import com.degrize.hseapp.service.mapper.SignalementMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,5 +87,11 @@ public class SignalementServiceImpl implements SignalementService {
     public void delete(Long id) {
         log.debug("Request to delete Signalement : {}", id);
         signalementRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Signalement> findAllByProjetId(Long id) {
+        log.debug("Request to get list signalement of Projets");
+        return signalementRepository.findAllByProjetId(id);
     }
 }

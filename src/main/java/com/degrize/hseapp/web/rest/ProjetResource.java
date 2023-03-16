@@ -1,5 +1,6 @@
 package com.degrize.hseapp.web.rest;
 
+import com.degrize.hseapp.domain.Projet;
 import com.degrize.hseapp.repository.ProjetRepository;
 import com.degrize.hseapp.service.ProjetService;
 import com.degrize.hseapp.service.dto.ProjetDTO;
@@ -179,5 +180,20 @@ public class ProjetResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/projets/liste")
+    public ResponseEntity<List<Projet>> getAllProjetsNoPageble() {
+        log.debug("REST request to get list of Projets");
+        List<Projet> projetList = projetService.findAllNoPageble();
+        return ResponseEntity.ok().body(projetList);
+    }
+
+    @GetMapping("/projets/search/{projetTitre}")
+    public ResponseEntity<List<Projet>> getSearchProjetNoPageable(@PathVariable String projetTitre) {
+        log.debug("REST request to get a page of Projet serach ");
+
+        List<Projet> projets = projetService.findAllByProjetTitre(projetTitre);
+        return ResponseEntity.ok().body(projets);
     }
 }

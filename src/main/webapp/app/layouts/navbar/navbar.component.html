@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
-      <span jhiTranslate="global.title" class="navbar-title">HseApplication</span>
+      <span jhiTranslate="global.title" class="navbar-title">QHSE Africa</span>
       <span class="navbar-version">{{ version }}</span>
     </a>
     <a
@@ -18,7 +18,7 @@
       <fa-icon icon="bars"></fa-icon>
     </a>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto d-flex align-items-center justify-content-end navbar-nav ml-lg-auto">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
             <span>
@@ -27,9 +27,49 @@
             </span>
           </a>
         </li>
+
+        <li *ngSwitchCase="true">
+          <form (ngSubmit)="search()" class="navbar-search navbar-search-light form-inline mr-3 d-none d-md-flex ml-lg-auto">
+            <div class="form-group mb-0" [ngClass]="{ focused: focus === true }">
+              <div class="input-group input-group-alternative bg-white">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input
+                  id="inputSearch"
+                  class="form-control"
+                  placeholder="Rechercher un projet"
+                  type="text"
+                  (focus)="focus = true"
+                  (blur)="focus = false"
+                  id="selectr1"
+                />
+              </div>
+            </div>
+          </form>
+        </li>
+
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          *jhiHasAnyAuthority="['ROLE_MISSION_DE_CONTROLE']"
+        >
+          <a
+            class="nav-link"
+            routerLink="projet"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="collapseNavbar()"
+          >
+            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+            <span jhiTranslate="global.menu.entities.projet">Projet</span>
+          </a>
+        </li>
+
         <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
         <li
-          *ngSwitchCase="true"
+          *jhiHasAnyAuthority="['ROLE_ADMIN']"
           ngbDropdown
           class="nav-item dropdown pointer"
           display="dynamic"
@@ -55,7 +95,7 @@
                 <span jhiTranslate="global.menu.entities.projet">Projet</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
               <a
                 class="dropdown-item"
                 routerLink="regle"
@@ -67,7 +107,7 @@
                 <span jhiTranslate="global.menu.entities.regle">Regle</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
               <a
                 class="dropdown-item"
                 routerLink="signalement"
@@ -79,7 +119,7 @@
                 <span jhiTranslate="global.menu.entities.signalement">Signalement</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
               <a
                 class="dropdown-item"
                 routerLink="avancement"
@@ -151,8 +191,8 @@
         <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *ngIf="languages && languages.length > 1">
           <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
             <span>
-              <fa-icon icon="flag"></fa-icon>
-              <span jhiTranslate="global.menu.language">Langue</span>
+              <img width="30px" [src]="'../../../content/assets/img/icons/flags/' + lang + '.png'" class="img-flags" />
+              <span>{{ lang.toUpperCase() }} </span>
             </span>
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="languagesnavBarDropdown">
@@ -162,8 +202,12 @@
                 [jhiActiveMenu]="language"
                 href="javascript:void(0);"
                 (click)="changeLanguage(language); collapseNavbar()"
-                >{{ language | findLanguageFromKey }}</a
               >
+                <span>
+                  <img [src]="'../../../content/assets/img/icons/flags/' + language + '.png'" class="img-flags" />
+                  <span>{{ language | findLanguageFromKey }} </span>
+                </span>
+              </a>
             </li>
           </ul>
         </li>

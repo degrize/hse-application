@@ -1,0 +1,29 @@
+@import '~content/scss/bootstrap-variables';
+
+.product-item {
+  .product-item-content {
+  }
+
+  .product-image {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+  }
+}
+
+.button-start {
+  background-color: $color-eva;
+  border: none;
+}
+.button-start:hover {
+  transition: 0.3s ease;
+  transform: translateX(-3px);
+  background: linear-gradient(to right, $color-eva, #67c976) !important;
+  border: none;
+  color: white !important;
+}
+
+.button-login {
+  color: $color-eva !important;
+  border-color: $color-eva !important;
+}

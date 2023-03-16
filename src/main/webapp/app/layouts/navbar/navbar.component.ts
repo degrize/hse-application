@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionStorageService } from 'ngx-webstorage';
 
-import { VERSION } from 'app/app.constants';
+import { VERSION, VERSIONNUMBER } from 'app/app.constants';
 import { LANGUAGES } from 'app/config/language.constants';
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
@@ -24,6 +24,9 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
+  searchInput = '';
+  lang = 'fr';
+  public focus: any;
 
   constructor(
     private loginService: LoginService,
@@ -34,11 +37,16 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) {
     if (VERSION) {
-      this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
+      // this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
+      this.version = VERSIONNUMBER;
     }
   }
 
   ngOnInit(): void {
+    if (this.sessionStorageService.retrieve('locale')) {
+      this.lang = this.sessionStorageService.retrieve('locale');
+    }
+
     this.entitiesNavbarItems = EntityNavbarItems;
     this.profileService.getProfileInfo().subscribe(profileInfo => {
       this.inProduction = profileInfo.inProduction;
@@ -51,6 +59,7 @@ export class NavbarComponent implements OnInit {
   }
 
   changeLanguage(languageKey: string): void {
+    this.lang = languageKey;
     this.sessionStorageService.store('locale', languageKey);
     this.translateService.use(languageKey);
   }
@@ -66,10 +75,19 @@ export class NavbarComponent implements OnInit {
   logout(): void {
     this.collapseNavbar();
     this.loginService.logout();
-    this.router.navigate(['']);
+    /*this.router.navigate(['']);*/
+    this.router.navigateByUrl('');
   }
 
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+
+  search(): void {
+    let inputSearch = document.getElementsByTagName('input');
+    this.searchInput = inputSearch[0].value;
+    if (this.searchInput !== '') {
+      this.router.navigateByUrl('/search?projetTitre=' + this.searchInput);
+    }
   }
 }

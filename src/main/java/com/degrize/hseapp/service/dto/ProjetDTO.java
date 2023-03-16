@@ -21,6 +21,7 @@ public class ProjetDTO implements Serializable {
     private String description;
 
     private String duree;
+    private String uniteDuree;
 
     private String ville;
 
@@ -49,6 +50,7 @@ public class ProjetDTO implements Serializable {
     private byte[] fichier4;
 
     private String fichier4ContentType;
+    private Boolean isDone;
 
     public Long getId() {
         return id;
@@ -80,6 +82,14 @@ public class ProjetDTO implements Serializable {
 
     public void setDuree(String duree) {
         this.duree = duree;
+    }
+
+    public String getUniteDuree() {
+        return uniteDuree;
+    }
+
+    public void setUniteDuree(String uniteDuree) {
+        this.uniteDuree = uniteDuree;
     }
 
     public String getVille() {
@@ -162,6 +172,14 @@ public class ProjetDTO implements Serializable {
         this.fichier4ContentType = fichier4ContentType;
     }
 
+    public Boolean getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(Boolean done) {
+        isDone = done;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -197,6 +215,8 @@ public class ProjetDTO implements Serializable {
             ", fichier2='" + getFichier2() + "'" +
             ", fichier3='" + getFichier3() + "'" +
             ", fichier4='" + getFichier4() + "'" +
+            ", isDone='" + getIsDone() + "'" +
+            ", uniteDuree='" + getUniteDuree() + "'" +
             "}";
     }
 }

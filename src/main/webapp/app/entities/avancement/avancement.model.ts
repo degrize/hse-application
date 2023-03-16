@@ -14,6 +14,7 @@ export interface IAvancement {
   fichier4?: string | null;
   fichier4ContentType?: string | null;
   projet?: Pick<IProjet, 'id' | 'titre'> | null;
+  code?: string | null;
 }
 
 export type NewAvancement = Omit<IAvancement, 'id'> & { id: null };

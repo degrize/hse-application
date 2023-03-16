@@ -1,6 +1,8 @@
 package com.degrize.hseapp.service;
 
+import com.degrize.hseapp.domain.Projet;
 import com.degrize.hseapp.service.dto.ProjetDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,4 +57,8 @@ public interface ProjetService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<Projet> findAllNoPageble();
+
+    List<Projet> findAllByProjetTitre(String projetTitre);
 }

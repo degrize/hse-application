@@ -1,5 +1,7 @@
 package com.degrize.hseapp.web.rest;
 
+import com.degrize.hseapp.domain.Projet;
+import com.degrize.hseapp.domain.Regle;
 import com.degrize.hseapp.repository.RegleRepository;
 import com.degrize.hseapp.service.RegleService;
 import com.degrize.hseapp.service.dto.RegleDTO;
@@ -188,5 +190,12 @@ public class RegleResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/regles/listeByProjetId/{id}")
+    public ResponseEntity<List<Regle>> getAllByProjetId(@PathVariable Long id) {
+        log.debug("REST request to get list of regle of Projets ");
+        List<Regle> regleList = regleService.findAllByProjetId(id);
+        return ResponseEntity.ok().body(regleList);
     }
 }

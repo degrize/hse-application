@@ -1,5 +1,7 @@
 package com.degrize.hseapp.web.rest;
 
+import com.degrize.hseapp.domain.Regle;
+import com.degrize.hseapp.domain.Signalement;
 import com.degrize.hseapp.repository.SignalementRepository;
 import com.degrize.hseapp.service.SignalementService;
 import com.degrize.hseapp.service.dto.SignalementDTO;
@@ -188,5 +190,12 @@ public class SignalementResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/signalements/listeByProjetId/{id}")
+    public ResponseEntity<List<Signalement>> getAllByProjetId(@PathVariable Long id) {
+        log.debug("REST request to get list of signalement of Projets ");
+        List<Signalement> signalementList = signalementService.findAllByProjetId(id);
+        return ResponseEntity.ok().body(signalementList);
     }
 }

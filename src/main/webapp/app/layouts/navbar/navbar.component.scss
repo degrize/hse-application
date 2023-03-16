@@ -17,6 +17,8 @@ Navbar
 
 .navbar {
   padding: 0.2rem 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 
   a.nav-link {
     font-weight: 400;
@@ -31,6 +33,17 @@ Logo styles
   width: 45px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+  background: url('../../../content/images/home_208px.png') no-repeat center center;
   background-size: contain;
+}
+
+.container-fluid {
+  display: flex;
+  justify-content: space-between;
+}
+
+// Langue
+// Style Debut
+.img-flags {
+  width: 30px;
 }

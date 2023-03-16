@@ -5,6 +5,7 @@ import com.degrize.hseapp.repository.ProjetRepository;
 import com.degrize.hseapp.service.ProjetService;
 import com.degrize.hseapp.service.dto.ProjetDTO;
 import com.degrize.hseapp.service.mapper.ProjetMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class ProjetServiceImpl implements ProjetService {
     @Override
     public ProjetDTO save(ProjetDTO projetDTO) {
         log.debug("Request to save Projet : {}", projetDTO);
+        projetDTO.setIsDone(false);
         Projet projet = projetMapper.toEntity(projetDTO);
         projet = projetRepository.save(projet);
         return projetMapper.toDto(projet);
@@ -80,5 +82,17 @@ public class ProjetServiceImpl implements ProjetService {
     public void delete(Long id) {
         log.debug("Request to delete Projet : {}", id);
         projetRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Projet> findAllNoPageble() {
+        log.debug("Request to get list of Projets");
+        return projetRepository.findAll();
+    }
+
+    @Override
+    public List<Projet> findAllByProjetTitre(String projetTitre) {
+        return projetRepository.findProjetByLikeTitre(projetTitre);
     }
 }

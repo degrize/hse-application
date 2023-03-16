@@ -11,15 +11,20 @@ import { AlertError } from 'app/shared/alert/alert-error.model';
 import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 
+import villes from '../../../../content/villes.json';
+
 @Component({
   selector: 'jhi-projet-update',
   templateUrl: './projet-update.component.html',
+  styleUrls: ['./projet-update.component.scss'],
 })
 export class ProjetUpdateComponent implements OnInit {
   isSaving = false;
   projet: IProjet | null = null;
 
   editForm: ProjetFormGroup = this.projetFormService.createProjetFormGroup();
+
+  villesList: { ville: string }[] = villes;
 
   constructor(
     protected dataUtils: DataUtils,

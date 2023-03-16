@@ -1,6 +1,8 @@
 package com.degrize.hseapp.service;
 
+import com.degrize.hseapp.domain.Signalement;
 import com.degrize.hseapp.service.dto.SignalementDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -63,4 +65,5 @@ public interface SignalementService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    List<Signalement> findAllByProjetId(Long id);
 }

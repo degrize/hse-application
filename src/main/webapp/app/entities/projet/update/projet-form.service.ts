@@ -21,6 +21,7 @@ type ProjetFormGroupContent = {
   titre: FormControl<IProjet['titre']>;
   description: FormControl<IProjet['description']>;
   duree: FormControl<IProjet['duree']>;
+  uniteDuree: FormControl<IProjet['uniteDuree']>;
   ville: FormControl<IProjet['ville']>;
   code: FormControl<IProjet['code']>;
   fichier1: FormControl<IProjet['fichier1']>;
@@ -31,6 +32,7 @@ type ProjetFormGroupContent = {
   fichier3ContentType: FormControl<IProjet['fichier3ContentType']>;
   fichier4: FormControl<IProjet['fichier4']>;
   fichier4ContentType: FormControl<IProjet['fichier4ContentType']>;
+  isDone: FormControl<IProjet['isDone']>;
 };
 
 export type ProjetFormGroup = FormGroup<ProjetFormGroupContent>;
@@ -54,17 +56,31 @@ export class ProjetFormService {
         validators: [Validators.required],
       }),
       description: new FormControl(projetRawValue.description),
-      duree: new FormControl(projetRawValue.duree),
-      ville: new FormControl(projetRawValue.ville),
-      code: new FormControl(projetRawValue.code),
-      fichier1: new FormControl(projetRawValue.fichier1),
-      fichier1ContentType: new FormControl(projetRawValue.fichier1ContentType),
+      duree: new FormControl(projetRawValue.duree, {
+        validators: [Validators.required, Validators.min(1)],
+      }),
+      uniteDuree: new FormControl(projetRawValue.uniteDuree, {
+        validators: [Validators.required],
+      }),
+      ville: new FormControl(projetRawValue.ville, {
+        validators: [Validators.required],
+      }),
+      code: new FormControl(projetRawValue.code, {
+        validators: [Validators.required, Validators.minLength(4)],
+      }),
+      fichier1: new FormControl(projetRawValue.fichier1, {
+        validators: [Validators.required],
+      }),
+      fichier1ContentType: new FormControl(projetRawValue.fichier1ContentType, {
+        validators: [Validators.required],
+      }),
       fichier2: new FormControl(projetRawValue.fichier2),
       fichier2ContentType: new FormControl(projetRawValue.fichier2ContentType),
       fichier3: new FormControl(projetRawValue.fichier3),
       fichier3ContentType: new FormControl(projetRawValue.fichier3ContentType),
       fichier4: new FormControl(projetRawValue.fichier4),
       fichier4ContentType: new FormControl(projetRawValue.fichier4ContentType),
+      isDone: new FormControl(projetRawValue.isDone),
     });
   }
 

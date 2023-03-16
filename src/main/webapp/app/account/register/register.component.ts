@@ -17,8 +17,8 @@ import { numeroCIValidator } from '../../shared/validators/valid.validator';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements AfterViewInit {
-  @ViewChild('nom', { static: false })
-  login?: ElementRef;
+  // @ViewChild('nom', { static: false })
+  // login?: ElementRef;
 
   doNotMatch = false;
   error = false;
@@ -100,9 +100,9 @@ export class RegisterComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.login) {
-      this.login.nativeElement.focus();
-    }
+    //if (this.login) {
+    // this.login.nativeElement.focus();
+    //}
   }
 
   initMainForm(): void {

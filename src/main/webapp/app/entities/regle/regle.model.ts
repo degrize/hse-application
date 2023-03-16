@@ -4,6 +4,7 @@ import { IProjet } from 'app/entities/projet/projet.model';
 export interface IRegle {
   id: number;
   texte?: string | null;
+  code?: string | null;
   date?: dayjs.Dayjs | null;
   projet?: Pick<IProjet, 'id' | 'titre'> | null;
 }

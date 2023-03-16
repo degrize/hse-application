@@ -1,79 +1,69 @@
-<div class="row">
-  <div class="col-md-3">
-    <span class="hipster img-fluid rounded"></span>
-  </div>
+<div [ngSwitch]="account !== null" class="home flex-column d-flex justify-content-center">
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <jhi-hero-page [account]="account"></jhi-hero-page>
 
-  <div class="col-md-9">
-    <h1 class="display-4"><span jhiTranslate="home.title">Bienvenue, Java Hipster !</span> (Hse Application)</h1>
-
-    <p class="lead" jhiTranslate="home.subtitle">Ceci est votre page d'accueil</p>
-
-    <div [ngSwitch]="account !== null">
-      <div class="alert alert-success" *ngSwitchCase="true">
-        <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }"
-          >Vous êtes connecté en tant que "{{ account.login }}".</span
-        >
+    <div class="py-5 mt-4">
+      <div class="text-900 font-bold text-6xl mb-2 text-center">
+        <div class="text-900 font-bold text-6xl mb-2 text-center">
+          <span class="text-900"> Categories,</span>
+          <span class="text-eva">Projets</span>
+        </div>
       </div>
+      <div class="text-700 text-2xl text-center line-height-3">Decouvrez la liste des projets en fonction des categories</div>
+    </div>
 
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span jhiTranslate="global.messages.info.authenticated.prefix">Si vous voulez vous </span>
-        <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">connecter</a
-        ><span jhiTranslate="global.messages.info.authenticated.suffix"
-          >, vous pouvez utiliser les comptes par défaut : <br />
-          - Administrateur (nom d'utilisateur="admin" et mot de passe ="admin") <br />
-          - Utilisateur (nom d'utilisateur="user" et mot de passe ="user").</span
-        >
+    <section class="col-xl-10">
+      <ng-container *ngFor="let categorie of categories">
+        <div class="py-2 my-4 text-center shadow col-xl-12 align-items-center">
+          <jhi-home-projets [categorie]="categorie"></jhi-home-projets>
+        </div>
+      </ng-container>
+    </section>
+
+    <section>
+      <jhi-home-solutions></jhi-home-solutions>
+    </section>
+
+    <div class="py-1 mt-8 d-flex justify-content-center align-items-center flex-column">
+      <div class="text-900 font-bold text-6xl mb-2 text-center">
+        <div class="text-900 font-bold text-6xl mb-2 text-center">
+          <span class="text-900"> Remerciements,</span>
+          <span class="text-eva">nos partenaires</span>
+        </div>
       </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span jhiTranslate="global.messages.info.register.noaccount">Vous n'avez pas encore de compte ?</span>&nbsp;
-        <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Créer un compte</a>
+      <div class="text-700 text-1xl col-xl-8 text-center line-height-3">
+        Sincère Remerciement au partenaires qui nous ont soutenu durant toute la conception jusqu'a la réalisation du projet QHSE
       </div>
     </div>
 
-    <p jhiTranslate="home.question">Si vous avez des questions à propos de JHipster :</p>
+    <section id="clients" class="surface-section mt-4 text-center col-xl-12">
+      <div class="container d-flex justify-content-center align-items-center flex-column">
+        <div class="row col-xl-10 no-gutters clients-wrap clearfix wow fadeInUp" style="visibility: visible; animation-name: fadeInUp">
+          <div class="col-lg-3 col-md-4 col-xs-6 mb-4">
+            <div class="client-logo">
+              <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1559460379/client-5.png" class="img-fluid" alt="" />
+            </div>
+          </div>
 
-    <ul>
-      <li>
-        <a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.homepage"
-          >Page d'accueil de JHipster</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://stackoverflow.com/tags/jhipster/info"
-          target="_blank"
-          rel="noopener noreferrer"
-          jhiTranslate="home.link.stackoverflow"
-          >JHipster sur Stack Overflow</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/jhipster/generator-jhipster/issues?state=open"
-          target="_blank"
-          rel="noopener noreferrer"
-          jhiTranslate="home.link.bugtracker"
-          >JHipster bug tracker</a
-        >
-      </li>
-      <li>
-        <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.chat"
-          >JHipster public chat room</a
-        >
-      </li>
-      <li>
-        <a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.follow"
-          >Suivez @jhipster sur Twitter</a
-        >
-      </li>
-    </ul>
+          <div class="col-lg-3 col-md-4 col-xs-6 mb-2">
+            <div class="client-logo">
+              <img src="../../../content/assets/img/beve/log3.jpg" class="img-fluid" alt="" />
+            </div>
+          </div>
 
-    <p>
-      <span jhiTranslate="home.like">Si vous aimez JHipster, donnez nous une étoile sur</span>
-      <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.github"
-        >GitHub </a
-      >!
-    </p>
+          <div class="col-lg-3 col-md-4 col-xs-6 mb-2">
+            <div class="client-logo">
+              <img src="../../../content/assets/img/beve/log2.jpg" class="img-fluid" alt="" />
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6 mb-2">
+            <div class="client-logo">
+              <img src="../../../content/assets/img/beve/log1.jpg" class="img-fluid" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </div>
