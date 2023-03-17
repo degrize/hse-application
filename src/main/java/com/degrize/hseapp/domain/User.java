@@ -2,6 +2,7 @@ package com.degrize.hseapp.domain;
 
 import com.degrize.hseapp.config.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -102,6 +103,26 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "jhi_user" }, allowSetters = true)
+    private Set<Avancement> avancements = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "jhi_user" }, allowSetters = true)
+    private Set<Regle> regles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "jhi_user" }, allowSetters = true)
+    private Set<Signalement> signalements = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "jhi_user" }, allowSetters = true)
+    private Set<Projet> projets = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -230,6 +251,130 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Set<Regle> getRegles() {
+        return this.regles;
+    }
+
+    public void setRegles(Set<Regle> regles) {
+        if (this.regles != null) {
+            this.regles.forEach(i -> i.setUser(null));
+        }
+        if (regles != null) {
+            regles.forEach(i -> i.setUser(this));
+        }
+        this.regles = regles;
+    }
+
+    public User regles(Set<Regle> regles) {
+        this.setRegles(regles);
+        return this;
+    }
+
+    public User addRegle(Regle regle) {
+        this.regles.add(regle);
+        regle.setUser(this);
+        return this;
+    }
+
+    public User removeRegle(Regle regle) {
+        this.regles.remove(regle);
+        regle.setUser(null);
+        return this;
+    }
+
+    public Set<Signalement> getSignalements() {
+        return this.signalements;
+    }
+
+    public void setSignalements(Set<Signalement> signalements) {
+        if (this.signalements != null) {
+            this.signalements.forEach(i -> i.setUser(null));
+        }
+        if (signalements != null) {
+            signalements.forEach(i -> i.setUser(this));
+        }
+        this.signalements = signalements;
+    }
+
+    public User signalements(Set<Signalement> signalements) {
+        this.setSignalements(signalements);
+        return this;
+    }
+
+    public User addSignalement(Signalement signalement) {
+        this.signalements.add(signalement);
+        signalement.setUser(this);
+        return this;
+    }
+
+    public User removeSignalement(Signalement signalement) {
+        this.signalements.remove(signalement);
+        signalement.setUser(null);
+        return this;
+    }
+
+    public Set<Avancement> getAvancements() {
+        return this.avancements;
+    }
+
+    public void setAvancements(Set<Avancement> avancements) {
+        if (this.avancements != null) {
+            this.avancements.forEach(i -> i.setUser(null));
+        }
+        if (avancements != null) {
+            avancements.forEach(i -> i.setUser(this));
+        }
+        this.avancements = avancements;
+    }
+
+    public User avancements(Set<Avancement> avancements) {
+        this.setAvancements(avancements);
+        return this;
+    }
+
+    public User addAvancement(Avancement avancement) {
+        this.avancements.add(avancement);
+        avancement.setUser(this);
+        return this;
+    }
+
+    public User removeAvancement(Avancement avancement) {
+        this.avancements.remove(avancement);
+        avancement.setUser(null);
+        return this;
+    }
+
+    public Set<Projet> getProjets() {
+        return this.projets;
+    }
+
+    public void setProjets(Set<Projet> projets) {
+        if (this.projets != null) {
+            this.projets.forEach(i -> i.setUser(null));
+        }
+        if (projets != null) {
+            projets.forEach(i -> i.setUser(this));
+        }
+        this.projets = projets;
+    }
+
+    public User projets(Set<Projet> projets) {
+        this.setProjets(projets);
+        return this;
+    }
+
+    public User addProjet(Projet projet) {
+        this.projets.add(projet);
+        projet.setUser(this);
+        return this;
+    }
+
+    public User removeProjet(Projet projet) {
+        this.projets.remove(projet);
+        projet.setUser(null);
+        return this;
     }
 
     @Override

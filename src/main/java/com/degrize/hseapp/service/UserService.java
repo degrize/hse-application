@@ -118,7 +118,9 @@ public class UserService {
         newUser.setFirstName(userDTO.getFirstName());
         newUser.setLastName(userDTO.getLastName());
         if (userDTO.getEmail() != null) {
+            // Le mail est le Login
             newUser.setEmail(userDTO.getEmail().toLowerCase());
+            newUser.setLogin(userDTO.getEmail().toLowerCase());
         }
 
         newUser.setContact(userDTO.getContact());
@@ -126,7 +128,7 @@ public class UserService {
         newUser.setQuartierOuCommune(userDTO.getQuartierOuCommune());
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
-        // new user is not active
+        // new user is active
         newUser.setActivated(true);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
@@ -166,6 +168,7 @@ public class UserService {
         user.setLastName(userDTO.getLastName());
         if (userDTO.getEmail() != null) {
             user.setEmail(userDTO.getEmail().toLowerCase());
+            user.setLogin(userDTO.getEmail().toLowerCase());
         }
         user.setImageUrl(userDTO.getImageUrl());
         if (userDTO.getLangKey() == null) {
@@ -212,6 +215,7 @@ public class UserService {
                 user.setLastName(userDTO.getLastName());
                 if (userDTO.getEmail() != null) {
                     user.setEmail(userDTO.getEmail().toLowerCase());
+                    user.setLogin(userDTO.getEmail().toLowerCase());
                 }
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
@@ -260,6 +264,7 @@ public class UserService {
                 user.setLastName(lastName);
                 if (email != null) {
                     user.setEmail(email.toLowerCase());
+                    user.setLogin(email.toLowerCase());
                 }
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);

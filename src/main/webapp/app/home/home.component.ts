@@ -5,14 +5,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
-import { ProjetService } from '../entities/projet/service/projet.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { IProjet } from '../entities/projet/projet.model';
-import { HttpResponse } from '@angular/common/http';
 
 import villes from '../../content/villes.json';
-import Swal from 'sweetalert2';
-import List from 'list.js';
 
 @Component({
   selector: 'jhi-home',

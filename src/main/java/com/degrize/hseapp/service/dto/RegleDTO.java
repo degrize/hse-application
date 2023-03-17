@@ -22,6 +22,7 @@ public class RegleDTO implements Serializable {
     private Instant date;
 
     private ProjetDTO projet;
+    private UserDTO user;
 
     public Long getId() {
         return id;
@@ -53,6 +54,14 @@ public class RegleDTO implements Serializable {
 
     public void setProjet(ProjetDTO projet) {
         this.projet = projet;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     @Override

@@ -37,6 +37,10 @@ public class Regle implements Serializable {
     @JsonIgnoreProperties(value = { "regles", "signalements", "avancements" }, allowSetters = true)
     private Projet projet;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "regles", "signalements", "avancements", "projets" }, allowSetters = true)
+    private User user;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -88,6 +92,19 @@ public class Regle implements Serializable {
 
     public Regle projet(Projet projet) {
         this.setProjet(projet);
+        return this;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Regle user(User user) {
+        this.setUser(user);
         return this;
     }
 

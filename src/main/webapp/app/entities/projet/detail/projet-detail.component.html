@@ -3,11 +3,24 @@
     <div *ngIf="projet">
       <div class="d-flex justify-content-start">
         <h2 data-cy="projetDetailsHeading" class="mr-3"><span jhiTranslate="hseApplicationApp.projet.detail.title">Projet</span></h2>
+
+        <ng-container *jhiHasAnyAuthority="'ROLE_MISSION_DE_CONTROLE'">
+          <button
+            *ngIf="user?.id === projet?.user?.id"
+            data-cy="entityCreateButton"
+            class="btn btn-primary jh-create-entity"
+            [routerLink]="['/projet', projet.id, 'edit']"
+          >
+            <fa-icon icon="plus"></fa-icon>
+            <span jhiTranslate="entity.action.edit">Editer</span>
+          </button>
+        </ng-container>
+
         <button
           *jhiHasAnyAuthority="'ROLE_SPECIALISTE_EN_ENVIRONNEMENT_ET_SOCIAL'"
           data-cy="entityCreateButton"
           class="btn btn-primary jh-create-entity create-regle"
-          (click)="saveProjetSelected('/regle/new')"
+          (click)="goToLink('/regle/new')"
         >
           <fa-icon icon="plus"></fa-icon>
           <span jhiTranslate="hseApplicationApp.regle.home.createLabel"> Créer une nouvelle Règle </span>
@@ -16,7 +29,7 @@
           *jhiHasAnyAuthority="'ROLE_OUVRIER'"
           data-cy="entityCreateButton"
           class="btn btn-primary jh-create-entity"
-          (click)="saveProjetSelected('/avancement/new')"
+          (click)="goToLink('/avancement/new')"
         >
           <fa-icon icon="plus"></fa-icon>
           <span jhiTranslate="hseApplicationApp.avancement.home.createLabel"> Créer un avancement </span>
@@ -25,7 +38,7 @@
           *jhiHasAnyAuthority="'ROLE_RIVERAIN'"
           data-cy="entityCreateButton"
           class="btn btn-primary jh-create-entity"
-          (click)="saveProjetSelected('/signalement/new')"
+          (click)="goToLink('/signalement/new')"
         >
           <fa-icon icon="plus"></fa-icon>
           <span jhiTranslate="hseApplicationApp.signalement.home.createLabel"> Créer une nouvelle Signalement </span>
@@ -122,21 +135,33 @@
 
       <div>
         <section>
-          <h2><span>ENTITES</span></h2>
+          <h2><span>SPECIFICATIONS</span></h2>
           <p-accordion [multiple]="true">
             <p-accordionTab header="Règles">
               <ng-container *ngFor="let regle of regles">
-                <ul class="my-3">
-                  <li>Date : {{ regle.date }}</li>
-                  <li>Texte : {{ regle.texte }}</li>
-                </ul>
+                <div class="d-flex justify-content-between align-items-center">
+                  <ul class="my-1">
+                    <li>Date : {{ regle.date }}</li>
+                    <li>Texte : {{ regle.texte }}</li>
+                  </ul>
+                  <button
+                    *ngIf="regle.user?.id === user?.id"
+                    type="submit"
+                    (click)="goToLink('/regle/' + regle.id + '/edit')"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </button>
+                </div>
                 <hr />
               </ng-container>
             </p-accordionTab>
             <p-accordionTab header="Avancements">
-              <div class="d-flex justify-content-between align-items-center">
-                <ng-container *ngFor="let avancement of avancements">
-                  <ul class="my-3">
+              <ng-container *ngFor="let avancement of avancements">
+                <div class="d-flex justify-content-between align-items-center">
+                  <ul class="my-1">
                     <li>Date : {{ avancement.date }}</li>
                     <li>Texte : {{ avancement.description }}</li>
                   </ul>
@@ -170,20 +195,41 @@
                       </a>
                     </div>
                   </div>
-                </ng-container>
-              </div>
+                  <button
+                    *ngIf="avancement.user?.id === user?.id"
+                    type="submit"
+                    (click)="goToLink('/avancement/' + avancement.id + '/edit')"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </button>
+                </div>
+                <hr />
+              </ng-container>
             </p-accordionTab>
 
             <p-accordionTab header="Signalements">
-              <div class="d-flex justify-content-between align-items-center">
-                <ng-container *ngFor="let signalement of signalements">
-                  <ul class="my-3">
+              <ng-container *ngFor="let signalement of signalements">
+                <div class="d-flex justify-content-between align-items-center">
+                  <ul class="my-1">
                     <li>Date : {{ signalement.date }}</li>
                     <li>Texte : {{ signalement.texte }}</li>
                   </ul>
-                  <hr />
-                </ng-container>
-              </div>
+                  <button
+                    *ngIf="signalement.user?.id === user?.id"
+                    (click)="goToLink('/signalement/' + signalement.id + '/edit')"
+                    type="submit"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </button>
+                </div>
+                <hr />
+              </ng-container>
             </p-accordionTab>
           </p-accordion>
         </section>

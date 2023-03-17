@@ -42,6 +42,7 @@ public class AvancementDTO implements Serializable {
 
     private String fichier4ContentType;
     private ProjetDTO projet;
+    private UserDTO user;
 
     public Long getId() {
         return id;
@@ -137,6 +138,14 @@ public class AvancementDTO implements Serializable {
 
     public void setProjet(ProjetDTO projet) {
         this.projet = projet;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     @Override

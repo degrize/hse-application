@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { IProjet, NewProjet } from '../projet.model';
+import { IAvancement } from '../../avancement/avancement.model';
 
 /**
  * A partial Type with required key is used as form input.
@@ -33,6 +34,7 @@ type ProjetFormGroupContent = {
   fichier4: FormControl<IProjet['fichier4']>;
   fichier4ContentType: FormControl<IProjet['fichier4ContentType']>;
   isDone: FormControl<IProjet['isDone']>;
+  user: FormControl<IProjet['user']>;
 };
 
 export type ProjetFormGroup = FormGroup<ProjetFormGroupContent>;
@@ -81,6 +83,7 @@ export class ProjetFormService {
       fichier4: new FormControl(projetRawValue.fichier4),
       fichier4ContentType: new FormControl(projetRawValue.fichier4ContentType),
       isDone: new FormControl(projetRawValue.isDone),
+      user: new FormControl(projetRawValue.user),
     });
   }
 

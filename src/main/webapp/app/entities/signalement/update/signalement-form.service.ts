@@ -34,6 +34,7 @@ type SignalementFormGroupContent = {
   texte: FormControl<SignalementFormRawValue['texte']>;
   date: FormControl<SignalementFormRawValue['date']>;
   projet: FormControl<SignalementFormRawValue['projet']>;
+  user: FormControl<SignalementFormRawValue['user']>;
 };
 
 export type SignalementFormGroup = FormGroup<SignalementFormGroupContent>;
@@ -60,6 +61,7 @@ export class SignalementFormService {
         validators: [Validators.required],
       }),
       projet: new FormControl(signalementRawValue.projet),
+      user: new FormControl(signalementRawValue.user),
     });
   }
 

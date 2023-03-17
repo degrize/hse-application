@@ -12,6 +12,12 @@ import { EventManager, EventWithContent } from 'app/core/util/event-manager.serv
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { IProjet } from 'app/entities/projet/projet.model';
 import { ProjetService } from 'app/entities/projet/service/projet.service';
+import { IUser } from '../../user/user.model';
+import { AccountService } from '../../../core/auth/account.service';
+import { UserManagementService } from '../../../admin/user-management/service/user-management.service';
+import { User } from '../../../admin/user-management/user-management.model';
+import { SessionStorageService } from 'ngx-webstorage';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'jhi-avancement-update',
@@ -25,6 +31,9 @@ export class AvancementUpdateComponent implements OnInit {
 
   editForm: AvancementFormGroup = this.avancementFormService.createAvancementFormGroup();
 
+  user: IUser = { id: 1, login: '' };
+  projetSelected = false;
+
   constructor(
     protected dataUtils: DataUtils,
     protected eventManager: EventManager,
@@ -32,7 +41,10 @@ export class AvancementUpdateComponent implements OnInit {
     protected avancementFormService: AvancementFormService,
     protected projetService: ProjetService,
     protected elementRef: ElementRef,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
+    private userManagementService: UserManagementService,
+    private sessionStorageService: SessionStorageService
   ) {}
 
   compareProjet = (o1: IProjet | null, o2: IProjet | null): boolean => this.projetService.compareProjet(o1, o2);
@@ -45,6 +57,25 @@ export class AvancementUpdateComponent implements OnInit {
       }
 
       this.loadRelationshipsOptions();
+    });
+
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        const login = account.login;
+        if (login) {
+          console.log(this.userManagementService.find(login));
+          this.userManagementService.find(login).subscribe({
+            next: (res: User) => {
+              if (res.id) {
+                this.user.login = res.login;
+                this.user.id = res.id;
+                alert(res.id);
+              }
+            },
+            error: () => 'ERREUR',
+          });
+        }
+      }
     });
   }
 
@@ -77,13 +108,43 @@ export class AvancementUpdateComponent implements OnInit {
     window.history.back();
   }
 
+  loadProjectSelected(): void {
+    if (this.sessionStorageService.retrieve('projetId')) {
+      for (let i = 0; i < this.projetsSharedCollection.length; i++) {
+        if (this.sessionStorageService.retrieve('projetId') == this.projetsSharedCollection[i].id) {
+          /*this.projetsSharedCollection = [];*/
+          this.projetsSharedCollection = [this.projetsSharedCollection[i]];
+          this.projetSelected = true;
+          break;
+        }
+      }
+    }
+  }
+
   save(): void {
     this.isSaving = true;
     const avancement = this.avancementFormService.getAvancement(this.editForm);
-    if (avancement.id !== null) {
-      this.subscribeToSaveResponse(this.avancementService.update(avancement));
+
+    const codeProjet = avancement.code;
+    let verif = false;
+
+    if (this.projetSelected) {
+      if (codeProjet == this.projetsSharedCollection[0].code) {
+        verif = true;
+        avancement.projet = this.projetsSharedCollection[0];
+        this.sessionStorageService.clear('projetId');
+      }
+    }
+    if (verif) {
+      if (avancement.id !== null) {
+        this.subscribeToSaveResponse(this.avancementService.update(avancement));
+      } else {
+        avancement.user = this.user;
+        this.subscribeToSaveResponse(this.avancementService.create(avancement));
+      }
     } else {
-      this.subscribeToSaveResponse(this.avancementService.create(avancement));
+      this.isSaving = false;
+      this.onErrorCodeProjet();
     }
   }
 
@@ -121,6 +182,28 @@ export class AvancementUpdateComponent implements OnInit {
       .query()
       .pipe(map((res: HttpResponse<IProjet[]>) => res.body ?? []))
       .pipe(map((projets: IProjet[]) => this.projetService.addProjetToCollectionIfMissing<IProjet>(projets, this.avancement?.projet)))
-      .subscribe((projets: IProjet[]) => (this.projetsSharedCollection = projets));
+      .subscribe((projets: IProjet[]) => {
+        this.projetsSharedCollection = projets;
+        this.loadProjectSelected();
+      });
+  }
+
+  protected onErrorCodeProjet(): void {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: toast => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'error',
+      title: 'Le code est incorrect',
+    });
   }
 }

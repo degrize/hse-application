@@ -94,6 +94,10 @@ public class Projet implements Serializable {
     @JsonIgnoreProperties(value = { "projet" }, allowSetters = true)
     private Set<Avancement> avancements = new HashSet<>();
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "regles", "signalements", "avancements", "projets" }, allowSetters = true)
+    private User user;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -384,6 +388,19 @@ public class Projet implements Serializable {
     public Projet removeAvancement(Avancement avancement) {
         this.avancements.remove(avancement);
         avancement.setProjet(null);
+        return this;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Projet user(User user) {
+        this.setUser(user);
         return this;
     }
 

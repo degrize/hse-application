@@ -18,5 +18,6 @@ public interface AvancementMapper extends EntityMapper<AvancementDTO, Avancement
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     @Mapping(target = "titre", source = "titre")
+    @Mapping(target = "code", source = "code")
     ProjetDTO toDtoProjetTitre(Projet projet);
 }

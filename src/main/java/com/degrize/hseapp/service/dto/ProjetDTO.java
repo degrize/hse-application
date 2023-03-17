@@ -27,6 +27,8 @@ public class ProjetDTO implements Serializable {
 
     private String code;
 
+    private UserDTO user;
+
     /**
      * Joindre une image au projet\n@author MEDA.
      */
@@ -178,6 +180,14 @@ public class ProjetDTO implements Serializable {
 
     public void setIsDone(Boolean done) {
         isDone = done;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     @Override

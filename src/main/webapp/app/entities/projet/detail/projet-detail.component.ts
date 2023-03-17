@@ -13,6 +13,10 @@ import { AccordionModule } from 'primeng/accordion';
 import { AvancementService } from '../../avancement/service/avancement.service';
 import { SignalementService } from '../../signalement/service/signalement.service';
 import { SessionStorageService } from 'ngx-webstorage';
+import { IUser } from '../../user/user.model';
+import { AccountService } from '../../../core/auth/account.service';
+import { User } from '../../../admin/user-management/user-management.model';
+import { UserManagementService } from '../../../admin/user-management/service/user-management.service';
 
 @Component({
   selector: 'jhi-projet-detail',
@@ -25,6 +29,7 @@ export class ProjetDetailComponent implements OnInit {
   regles?: IRegle[];
   avancements?: IAvancement[];
   signalements?: ISignalement[];
+  user: IUser = { id: 1, login: '' };
 
   constructor(
     protected dataUtils: DataUtils,
@@ -33,7 +38,9 @@ export class ProjetDetailComponent implements OnInit {
     protected avancementService: AvancementService,
     protected signalementService: SignalementService,
     private sessionStorageService: SessionStorageService,
-    private router: Router
+    private router: Router,
+    private accountService: AccountService,
+    private userManagementService: UserManagementService
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +50,25 @@ export class ProjetDetailComponent implements OnInit {
         this.loadRegleList(this.projet.id);
         this.loadAvancementList(this.projet.id);
         this.loadSignalementList(this.projet.id);
+      }
+    });
+
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        const login = account.login;
+        if (login) {
+          console.log(this.userManagementService.find(login));
+          this.userManagementService.find(login).subscribe({
+            next: (res: User) => {
+              if (res.id) {
+                this.user.login = res.login;
+                this.user.id = res.id;
+                alert(res.id);
+              }
+            },
+            error: () => 'ERREUR',
+          });
+        }
       }
     });
   }
@@ -56,7 +82,7 @@ export class ProjetDetailComponent implements OnInit {
     );
   }
 
-  saveProjetSelected(lien: string): void {
+  goToLink(lien: any): void {
     this.sessionStorageService.store('projetId', this.projet?.id);
     this.router.navigate([lien]);
   }

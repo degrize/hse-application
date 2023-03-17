@@ -7,6 +7,7 @@ import { SignalementDetailComponent } from '../detail/signalement-detail.compone
 import { SignalementUpdateComponent } from '../update/signalement-update.component';
 import { SignalementRoutingResolveService } from './signalement-routing-resolve.service';
 import { ASC } from 'app/config/navigation.constants';
+import { UserManagementResolve } from '../../../admin/user-management/user-management.route';
 
 const signalementRoute: Routes = [
   {
@@ -22,6 +23,7 @@ const signalementRoute: Routes = [
     component: SignalementDetailComponent,
     resolve: {
       signalement: SignalementRoutingResolveService,
+      user: UserManagementResolve,
     },
     canActivate: [UserRouteAccessService],
   },
@@ -30,6 +32,7 @@ const signalementRoute: Routes = [
     component: SignalementUpdateComponent,
     resolve: {
       signalement: SignalementRoutingResolveService,
+      user: UserManagementResolve,
     },
     canActivate: [UserRouteAccessService],
   },
@@ -38,6 +41,7 @@ const signalementRoute: Routes = [
     component: SignalementUpdateComponent,
     resolve: {
       signalement: SignalementRoutingResolveService,
+      user: UserManagementResolve,
     },
     canActivate: [UserRouteAccessService],
   },

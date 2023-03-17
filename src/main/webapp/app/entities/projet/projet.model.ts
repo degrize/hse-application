@@ -1,3 +1,5 @@
+import { IUser } from '../user/user.model';
+
 export interface IProjet {
   id: number;
   titre?: string | null;
@@ -15,6 +17,7 @@ export interface IProjet {
   fichier4?: string | null;
   fichier4ContentType?: string | null;
   isDone?: boolean | null;
+  user?: Pick<IUser, 'id' | 'login'> | null;
 }
 
 export type NewProjet = Omit<IProjet, 'id'> & { id: null };

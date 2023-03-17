@@ -18,5 +18,6 @@ public interface SignalementMapper extends EntityMapper<SignalementDTO, Signalem
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     @Mapping(target = "titre", source = "titre")
+    @Mapping(target = "code", source = "code")
     ProjetDTO toDtoProjetTitre(Projet projet);
 }

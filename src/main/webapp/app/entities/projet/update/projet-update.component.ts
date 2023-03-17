@@ -12,6 +12,10 @@ import { EventManager, EventWithContent } from 'app/core/util/event-manager.serv
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 
 import villes from '../../../../content/villes.json';
+import { IUser } from '../../user/user.model';
+import { AccountService } from '../../../core/auth/account.service';
+import { UserManagementService } from '../../../admin/user-management/service/user-management.service';
+import { User } from '../../../admin/user-management/user-management.model';
 
 @Component({
   selector: 'jhi-projet-update',
@@ -25,6 +29,9 @@ export class ProjetUpdateComponent implements OnInit {
   editForm: ProjetFormGroup = this.projetFormService.createProjetFormGroup();
 
   villesList: { ville: string }[] = villes;
+  user: IUser = { id: 1, login: '' };
+
+  userId: number | null = null;
 
   constructor(
     protected dataUtils: DataUtils,
@@ -32,7 +39,9 @@ export class ProjetUpdateComponent implements OnInit {
     protected projetService: ProjetService,
     protected projetFormService: ProjetFormService,
     protected elementRef: ElementRef,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
+    private userManagementService: UserManagementService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +49,24 @@ export class ProjetUpdateComponent implements OnInit {
       this.projet = projet;
       if (projet) {
         this.updateForm(projet);
+      }
+    });
+
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        const login = account.login;
+        if (login) {
+          console.log(this.userManagementService.find(login));
+          this.userManagementService.find(login).subscribe({
+            next: (res: User) => {
+              if (res.id) {
+                this.user.login = res.login;
+                this.user.id = res.id;
+              }
+            },
+            error: () => 'ERREUR',
+          });
+        }
       }
     });
   }
@@ -79,6 +106,7 @@ export class ProjetUpdateComponent implements OnInit {
     if (projet.id !== null) {
       this.subscribeToSaveResponse(this.projetService.update(projet));
     } else {
+      projet.user = this.user;
       this.subscribeToSaveResponse(this.projetService.create(projet));
     }
   }

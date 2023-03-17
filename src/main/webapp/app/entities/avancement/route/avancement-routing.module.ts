@@ -7,6 +7,7 @@ import { AvancementDetailComponent } from '../detail/avancement-detail.component
 import { AvancementUpdateComponent } from '../update/avancement-update.component';
 import { AvancementRoutingResolveService } from './avancement-routing-resolve.service';
 import { ASC } from 'app/config/navigation.constants';
+import { UserManagementResolve } from '../../../admin/user-management/user-management.route';
 
 const avancementRoute: Routes = [
   {
@@ -22,6 +23,7 @@ const avancementRoute: Routes = [
     component: AvancementDetailComponent,
     resolve: {
       avancement: AvancementRoutingResolveService,
+      user: UserManagementResolve,
     },
     canActivate: [UserRouteAccessService],
   },
@@ -30,6 +32,7 @@ const avancementRoute: Routes = [
     component: AvancementUpdateComponent,
     resolve: {
       avancement: AvancementRoutingResolveService,
+      user: UserManagementResolve,
     },
     canActivate: [UserRouteAccessService],
   },
@@ -38,6 +41,7 @@ const avancementRoute: Routes = [
     component: AvancementUpdateComponent,
     resolve: {
       avancement: AvancementRoutingResolveService,
+      user: UserManagementResolve,
     },
     canActivate: [UserRouteAccessService],
   },

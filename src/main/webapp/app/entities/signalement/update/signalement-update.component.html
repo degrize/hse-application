@@ -56,7 +56,11 @@
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="hseApplicationApp.signalement.projet" for="field_projet">Projet</label>
+          <select *ngIf="projetSelected" class="form-control" disabled>
+            <option selected [ngValue]="projetsSharedCollection[0]">{{ projetsSharedCollection[0].titre }}</option>
+          </select>
           <select
+            *ngIf="!projetSelected"
             class="form-control"
             id="field_projet"
             data-cy="projet"

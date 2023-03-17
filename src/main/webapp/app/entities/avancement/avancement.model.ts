@@ -1,5 +1,6 @@
 import dayjs from 'dayjs/esm';
 import { IProjet } from 'app/entities/projet/projet.model';
+import { IUser } from '../user/user.model';
 
 export interface IAvancement {
   id: number;
@@ -13,8 +14,9 @@ export interface IAvancement {
   fichier3ContentType?: string | null;
   fichier4?: string | null;
   fichier4ContentType?: string | null;
-  projet?: Pick<IProjet, 'id' | 'titre'> | null;
+  projet?: Pick<IProjet, 'id' | 'titre' | 'code'> | null;
   code?: string | null;
+  user?: Pick<IUser, 'id' | 'login'> | null;
 }
 
 export type NewAvancement = Omit<IAvancement, 'id'> & { id: null };
