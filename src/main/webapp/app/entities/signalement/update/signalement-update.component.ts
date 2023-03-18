@@ -62,7 +62,6 @@ export class SignalementUpdateComponent implements OnInit {
               if (res.id) {
                 this.user.login = res.login;
                 this.user.id = res.id;
-                alert(res.id);
               }
             },
             error: () => 'ERREUR',
