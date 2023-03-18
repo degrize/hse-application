@@ -4,18 +4,18 @@
       "home": {
         "title": "Regles",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Regle",
-        "createOrEditLabel": "Créer ou éditer un Regle",
-        "notFound": "Aucun Regle trouvé"
+        "createLabel": "Ajouter une Règle au projet",
+        "createOrEditLabel": "Créer ou éditer une Règle",
+        "notFound": "Aucune Règle trouvée"
       },
-      "created": "Un nouveau Regle a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Regle avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Regle avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Règle a été créé avec l'identifiant {{ param }}",
+      "updated": "La Règle avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "La Règle avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Regle {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer la Règle {{ id }} ?"
       },
       "detail": {
-        "title": "Regle"
+        "title": "Règle"
       },
       "id": "ID",
       "texte": "Texte",

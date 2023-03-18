@@ -4,7 +4,7 @@
       "home": {
         "title": "Avancements",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Avancement",
+        "createLabel": "Ajouter un Avancement au projet",
         "createOrEditLabel": "Créer ou éditer un Avancement",
         "notFound": "Aucun Avancement trouvé"
       },

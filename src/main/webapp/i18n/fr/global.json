@@ -8,7 +8,7 @@
       "entities": {
         "main": "Entités",
         "projet": "Projet",
-        "regle": "Regle",
+        "regle": "Règle",
         "signalement": "Signalement",
         "avancement": "Avancement",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"

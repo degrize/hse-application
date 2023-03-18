@@ -4,7 +4,7 @@
       "home": {
         "title": "Signalements",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Signalement",
+        "createLabel": "Ajouter un Signalement au projet",
         "createOrEditLabel": "Créer ou éditer un Signalement",
         "notFound": "Aucun Signalement trouvé"
       },
