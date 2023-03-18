@@ -22,7 +22,9 @@
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="transition()">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <!--
           <th scope="col" jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon icon="sort"></fa-icon></th>
+-->
           <th scope="col" jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
           <th scope="col" jhiSortBy="langKey"><span jhiTranslate="userManagement.langKey">Langue</span> <fa-icon icon="sort"></fa-icon></th>
@@ -44,7 +46,9 @@
           <td>
             <a [routerLink]="['./', user.login, 'view']">{{ user.id }}</a>
           </td>
+          <!--
           <td>{{ user.login }}</td>
+-->
           <td>{{ user.email }}</td>
           <td>
             <button
