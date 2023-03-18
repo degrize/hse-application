@@ -1,14 +1,12 @@
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-body {
-  line-height: 1.5;
-  font-family: 'Poppins', sans-serif;
-}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 .container {
   max-width: 1170px;
@@ -22,7 +20,7 @@ ul {
   list-style: none;
 }
 .footer {
-  background-color: #99be0e;
+  background-color: #040f1a;
   padding: 70px 0;
 }
 .footer-col {
@@ -31,7 +29,7 @@ ul {
 }
 .footer-col h4 {
   font-size: 18px;
-  color: #000000;
+  color: #ffffff;
   text-transform: capitalize;
   margin-bottom: 35px;
   font-weight: 1000;
@@ -42,7 +40,7 @@ ul {
   position: absolute;
   left: 0;
   bottom: -10px;
-  background-color: #000000;
+  background-color: #ffffff;
   height: 2px;
   box-sizing: border-box;
   width: 50px;
@@ -53,10 +51,10 @@ ul {
 .footer-col ul li a {
   font-size: 16px;
   text-transform: capitalize;
-  color: #000000;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 300;
-  color: #000000;
+  color: #ffffff;
   display: block;
   transition: all 0.3s ease;
 }

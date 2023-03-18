@@ -15,7 +15,7 @@
           *ngSwitchCase="false"
           routerLink="/login"
           type="button"
-          class="mr-3 p-button-raised p-button-success button-start"
+          class="mr-3 mb-2 p-button-raised p-button-success button-start"
         ></button>
         <button
           pButton
@@ -30,8 +30,8 @@
           pButton
           pRipple
           label="Créer un projet"
-          *jhiHasAnyAuthority="'MISSION_DE_CONTROLE'"
-          routerLink="/liste-annonces"
+          *jhiHasAnyAuthority="'ROLE_SPECIALISTE_EN_ENVIRONNEMENT_ET_SOCIAL'"
+          routerLink="/projet/new"
           type="button"
           class="p-button-outlined p-button-success button-start"
         ></button>

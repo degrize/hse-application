@@ -22,6 +22,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'jhi-avancement-update',
   templateUrl: './avancement-update.component.html',
+  styleUrls: ['./avancement-update.component.scss'],
 })
 export class AvancementUpdateComponent implements OnInit {
   isSaving = false;

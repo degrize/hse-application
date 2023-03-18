@@ -12,65 +12,85 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="hseApplicationApp.signalement.texte" for="field_texte">Texte</label>
-          <input type="text" class="form-control" name="texte" id="field_texte" data-cy="texte" formControlName="texte" />
-          <div *ngIf="editForm.get('texte')!.invalid && (editForm.get('texte')!.dirty || editForm.get('texte')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('texte')?.errors?.required" jhiTranslate="entity.validation.required">
-              Ce champ est obligatoire.
-            </small>
+        <div class="d-flex align-items-center justify-content-between mb-3" *ngIf="editForm.controls.id.value !== null">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.signalement.id" for="field_id">ID</label>
+          </div>
+          <div class="colonneInput">
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="hseApplicationApp.signalement.date" for="field_date">Date</label>
-          <div class="d-flex">
-            <input
-              id="field_date"
-              data-cy="date"
-              type="datetime-local"
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.signalement.texte" for="field_texte">Texte</label>
+          </div>
+          <div class="colonneInput">
+            <input type="text" class="form-control" name="texte" id="field_texte" data-cy="texte" formControlName="texte" />
+            <div *ngIf="editForm.get('texte')!.invalid && (editForm.get('texte')!.dirty || editForm.get('texte')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('texte')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                Ce champ est obligatoire.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.signalement.date" for="field_date">Date</label>
+          </div>
+          <div class="colonneInput">
+            <div class="d-flex">
+              <input
+                id="field_date"
+                data-cy="date"
+                type="datetime-local"
+                class="form-control"
+                name="date"
+                formControlName="date"
+                placeholder="YYYY-MM-DD HH:mm"
+              />
+            </div>
+            <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('date')?.errors?.required" jhiTranslate="entity.validation.required">
+                Ce champ est obligatoire.
+              </small>
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('date')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+              >
+                Ce champ doit être une date et une heure.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="colonneLabel">
+            <label class="form-label" jhiTranslate="hseApplicationApp.signalement.projet" for="field_projet">Projet</label>
+          </div>
+          <div class="colonneInput">
+            <select *ngIf="projetSelected" class="form-control" disabled>
+              <option selected [ngValue]="projetsSharedCollection[0]">{{ projetsSharedCollection[0].titre }}</option>
+            </select>
+            <select
+              *ngIf="!projetSelected"
               class="form-control"
-              name="date"
-              formControlName="date"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
-          </div>
-          <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('date')?.errors?.required" jhiTranslate="entity.validation.required">
-              Ce champ est obligatoire.
-            </small>
-            <small
-              class="form-text text-danger"
-              [hidden]="!editForm.get('date')?.errors?.datetimelocal"
-              jhiTranslate="entity.validation.datetimelocal"
+              id="field_projet"
+              data-cy="projet"
+              name="projet"
+              formControlName="projet"
+              [compareWith]="compareProjet"
             >
-              Ce champ doit être une date et une heure.
-            </small>
+              <option [ngValue]="null"></option>
+              <option [ngValue]="projetOption" *ngFor="let projetOption of projetsSharedCollection">{{ projetOption.titre }}</option>
+            </select>
           </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="hseApplicationApp.signalement.projet" for="field_projet">Projet</label>
-          <select *ngIf="projetSelected" class="form-control" disabled>
-            <option selected [ngValue]="projetsSharedCollection[0]">{{ projetsSharedCollection[0].titre }}</option>
-          </select>
-          <select
-            *ngIf="!projetSelected"
-            class="form-control"
-            id="field_projet"
-            data-cy="projet"
-            name="projet"
-            formControlName="projet"
-            [compareWith]="compareProjet"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="projetOption" *ngFor="let projetOption of projetsSharedCollection">{{ projetOption.titre }}</option>
-          </select>
         </div>
       </div>
 

@@ -18,6 +18,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 @Component({
   selector: 'jhi-signalement-update',
   templateUrl: './signalement-update.component.html',
+  styleUrls: ['./signalement-update.component.scss'],
 })
 export class SignalementUpdateComponent implements OnInit {
   isSaving = false;

@@ -7,11 +7,17 @@
 
       <div class="card-connexion d-flex flex-column align-items-center justify-content-center shadow-sm bg-eva">
         <div class="d-flex flex-column align-items-center justify-content-center">
-          <h3>INSCRIPTION</h3>
-          <h3>
+          <h3 class="text-white">INSCRIPTION</h3>
+          <h3 class="text-white">
             <span jhiTranslate="global.messages.info.register.noaccount">Vous n'avez pas encore de compte ?</span>
             |
-            <a class="alert-link" routerLink="/account/register" jhiTranslate="global.messages.info.register.link">Créer un compte</a>
+            <a
+              class="alert-link text-green-300 hover:text-green-100"
+              routerLink="/account/register"
+              jhiTranslate="global.messages.info.register.link"
+            >
+              Créer un compte
+            </a>
           </h3>
         </div>
         <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication" data-cy="loginError">
@@ -82,17 +88,22 @@
           <div class="form-check">
             <label class="form-check-label" for="rememberMe">
               <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
-              <span jhiTranslate="login.form.rememberme">Garder la session ouverte</span>
+              <span jhiTranslate="login.form.rememberme" class="text-white">Garder la session ouverte</span>
             </label>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-create-compte input" jhiTranslate="login.form.button" data-cy="submit">
+          <button
+            type="submit"
+            class="btn btn-primary btn-create-compte input text-white hover:bg-white hover:text-black-alpha-60"
+            jhiTranslate="login.form.button"
+            data-cy="submit"
+          >
             Connexion
           </button>
         </form>
         <div class="mt-3">
           <a
-            class="alert-link"
+            class="alert-link text-green-300 hover:text-green-100"
             routerLink="/account/reset/request"
             jhiTranslate="login.password.forgot"
             data-cy="forgetYourPasswordSelector"

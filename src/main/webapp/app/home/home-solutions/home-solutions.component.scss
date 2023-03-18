@@ -1,0 +1,90 @@
+/* Grid Breakpoints
+---------------------------------------------------------------------- */
+
+/* 2 Columns */
+
+.mix,
+.gap {
+  width: calc(100% / 2 - (((2 - 1) * 1rem) / 2));
+}
+
+/* 3 Columns */
+
+@media screen and (min-width: 541px) {
+  .mix,
+  .gap {
+    width: calc(100% / 4 - (((3 - 1) * 1rem) / 3));
+    align-items: center;
+  }
+}
+.boutt {
+  margin-top: 50px;
+  background: linear-gradient(pink, #ffcb02);
+}
+
+.card-body {
+  max-width: 300px;
+}
+.card-title {
+  background: #f2f2f2;
+}
+
+.ja {
+  font-size: 48px;
+}
+
+.jb {
+  font-size: 50px;
+}
+
+.tab-pane {
+  margin: 20px;
+}
+.blockquote {
+  text-align: justify;
+}
+
+@media screen and (max-width: 641px) {
+  .ja {
+    font-size: 25px;
+  }
+
+  .jb {
+    font-size: 20px;
+  }
+
+  .creer-page {
+    font-family: Geomanist;
+
+    #divFilter {
+      button {
+        display: none;
+      }
+    }
+
+    h3 {
+      font-size: 12px;
+    }
+
+    .type {
+      font-size: 10px;
+      border-radius: 15px;
+      width: 25px;
+      margin-top: 9px;
+
+      span {
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+        text-orientation: sideways;
+      }
+    }
+  }
+
+  .card {
+    min-width: 90%;
+  }
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.4);
+}

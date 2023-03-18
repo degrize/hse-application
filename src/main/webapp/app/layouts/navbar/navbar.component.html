@@ -1,8 +1,8 @@
-<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
+<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark shadow-4">
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
-      <span jhiTranslate="global.title" class="navbar-title">QHSE Africa</span>
+      <span jhiTranslate="global.title" class="navbar-title text-sm">QHSE Africa</span>
       <span class="navbar-version">{{ version }}</span>
     </a>
     <a
@@ -228,6 +228,13 @@
             </span>
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
+            <li *ngSwitchCase="true">
+              <ng-container *ngFor="let authority of account?.authorities">
+                <h5 class="text-center" *ngIf="authority !== 'ROLE_USER'">
+                  {{ 'global.authority.' + authority | translate }}
+                </h5>
+              </ng-container>
+            </li>
             <li *ngSwitchCase="true">
               <a
                 class="dropdown-item"

@@ -17,8 +17,6 @@ Navbar
 
 .navbar {
   padding: 0.2rem 1rem;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
 
   a.nav-link {
     font-weight: 400;
@@ -29,8 +27,8 @@ Navbar
 Logo styles
 ========================================================================== */
 .logo-img {
-  height: 45px;
-  width: 45px;
+  height: 30px;
+  width: 30px;
   display: inline-block;
   vertical-align: middle;
   background: url('../../../content/images/home_208px.png') no-repeat center center;

@@ -93,7 +93,7 @@
     "authority": {
       "ROLE_ADMIN": "Administrateur",
       "ROLE_USER": "Utilisateur",
-      "ROLE_SPECIALISTE_EN_ENVIRONNEMENT_ET_SOCIAL": "Spécialiste en...",
+      "ROLE_SPECIALISTE_EN_ENVIRONNEMENT_ET_SOCIAL": "Spécialiste",
       "ROLE_MISSION_DE_CONTROLE": "Mission de contrôle",
       "ROLE_RESPONSABLE_HSE": "Responsable HSE",
       "ROLE_OUVRIER": "Ouvrier",
