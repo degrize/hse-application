@@ -130,3 +130,14 @@ Then run:
 docker-compose -f src/main/docker/app.yml up -d
 ```
 
+## How to update the database
+
+- add a file  in `src/main/resources/config/liquibase/changelog` with the changes by running the command `./mvnw liquibase:diff`
+- update the version in `src/main/resources/config/liquibase/master.xml`
+
+If you have made changes to the database schema, you can update the database by running the following command:
+
+```
+./mvnw
+```
+
